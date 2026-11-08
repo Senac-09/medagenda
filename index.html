@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MedAgenda: cadastro de médicos credenciados e agenda de consultas para pequenas clínicas e cooperativas médicas.">
+  <title>MedAgenda – Rede credenciada e agenda de consultas</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Atalho para quem navega pelo teclado ou por leitor de tela -->
+  <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="cabecalho">
+    <div class="cabecalho__interno">
+      <a class="logo" href="#conteudo" aria-label="MedAgenda, início">
+        <span class="logo__marca" aria-hidden="true">+</span>
+        <span class="logo__nome">MedAgenda</span>
+      </a>
+      <nav class="menu" aria-label="Seções do sistema">
+        <a class="menu__link" href="#secao-medicos">Médicos</a>
+        <a class="menu__link" href="#secao-agenda">Agendar</a>
+        <a class="menu__link" href="#secao-consultas">Consultas</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo" class="conteudo">
+    <p class="conteudo__intro">Rede credenciada e agenda de consultas para pequenas clínicas e cooperativas médicas.</p>
+
+    <!-- Mensagens de sucesso/erro exibidas pelo JS (aria-live avisa o leitor de tela) -->
+    <div id="mensagem" class="mensagem is-hidden" role="status" aria-live="polite"></div>
+
+    <!-- ============ RF01 e RF02: MÉDICOS CREDENCIADOS ============ -->
+    <section id="secao-medicos" class="secao" aria-labelledby="titulo-medicos">
+      <h2 id="titulo-medicos" class="secao__titulo">Médicos credenciados</h2>
+
+      <form id="form-medico" class="card form" novalidate>
+        <h3 id="titulo-form-medico" class="form__titulo">Cadastrar médico</h3>
+        <!-- Vazio = novo cadastro; preenchido = edição de um médico existente -->
+        <input type="hidden" id="medico-id" name="id">
+
+        <div class="form__grade">
+          <div class="form__grupo form__grupo--duplo">
+            <label class="form__rotulo" for="medico-nome">Nome completo</label>
+            <input class="form__campo" type="text" id="medico-nome" name="nome" required maxlength="100">
+            <small class="form__erro" id="erro-medico-nome"></small>
+          </div>
+
+          <div class="form__grupo">
+            <label class="form__rotulo" for="medico-crm">CRM</label>
+            <input class="form__campo" type="text" id="medico-crm" name="crm" required placeholder="Ex.: 123456/SP" maxlength="12">
+            <small class="form__erro" id="erro-medico-crm"></small>
+          </div>
+
+          <div class="form__grupo">
+            <label class="form__rotulo" for="medico-especialidade">Especialidade</label>
+            <select class="form__campo" id="medico-especialidade" name="especialidade" required>
+              <option value="">Selecione</option>
+              <option>Cardiologia</option>
+              <option>Clínica Geral</option>
+              <option>Dermatologia</option>
+              <option>Ginecologia</option>
+              <option>Oftalmologia</option>
+              <option>Ortopedia</option>
+              <option>Pediatria</option>
+              <option>Psiquiatria</option>
+            </select>
+            <small class="form__erro" id="erro-medico-especialidade"></small>
+          </div>
+
+          <div class="form__grupo">
+            <label class="form__rotulo" for="medico-telefone">Telefone</label>
+            <input class="form__campo" type="tel" id="medico-telefone" name="telefone" required placeholder="(11) 99999-9999">
+            <small class="form__erro" id="erro-medico-telefone"></small>
+          </div>
+
+          <div class="form__grupo">
+            <label class="form__rotulo" for="medico-email">E-mail <span class="form__opcional">(opcional)</span></label>
+            <input class="form__campo" type="email" id="medico-email" name="email" placeholder="nome@clinica.com.br">
+            <small class="form__erro" id="erro-medico-email"></small>
+          </div>
+
+          <!-- Dias e horários de atendimento: base para montar a agenda (RF03) -->
+          <fieldset class="form__grupo form__grupo--largo dias">
+            <legend class="form__rotulo">Dias de atendimento</legend>
+            <div class="dias__opcoes">
+              <label class="dias__dia"><input type="checkbox" id="medico-dia-seg" name="dias" value="seg"> Seg</label>
+              <label class="dias__dia"><input type="checkbox" id="medico-dia-ter" name="dias" value="ter"> Ter</label>
+              <label class="dias__dia"><input type="checkbox" id="medico-dia-qua" name="dias" value="qua"> Qua</label>
+              <label class="dias__dia"><input type="checkbox" id="medico-dia-qui" name="dias" value="qui"> Qui</label>
+              <label class="dias__dia"><input type="checkbox" id="medico-dia-sex" name="dias" value="sex"> Sex</label>
+              <label class="dias__dia"><input type="checkbox" id="medico-dia-sab" name="dias" value="sab"> Sáb</label>
+            </div>
+            <small class="form__erro" id="erro-medico-dias"></small>
+          </fieldset>
+
+          <div class="form__grupo">
+            <label class="form__rotulo" for="medico-inicio">Início do atendimento</label>
+            <input class="form__campo" type="time" id="medico-inicio" name="inicio" required>
+            <small class="form__erro" id="erro-medico-inicio"></small>
+          </div>
+
+          <div class="form__grupo">
+            <label class="form__rotulo" for="medico-fim">Fim do atendimento</label>
+            <input class="form__campo" type="time" id="medico-fim" name="fim" required>
+            <small class="form__erro" id="erro-medico-fim"></small>
+          </div>
+
+          <div class="form__grupo">
+            <label class="form__rotulo" for="medico-duracao">Duração da consulta</label>
+            <select class="form__campo" id="medico-duracao" name="duracao" required>
+              <option value="15">15 minutos</option>
+              <option value="20">20 minutos</option>
+              <option value="30" selected>30 minutos</option>
+              <option value="45">45 minutos</option>
+              <option value="60">1 hora</option>
+            </select>
+          </div>
+
+          <div class="form__grupo form__grupo--check">
+            <label class="check"><input type="checkbox" id="medico-ativo" name="ativo" checked> Médico ativo na rede</label>
+          </div>
+        </div>
+
+        <div class="form__acoes">
+          <button type="submit" id="btn-salvar-medico" class="btn btn--primario">Salvar médico</button>
+          <button type="reset" id="btn-cancelar-medico" class="btn btn--secundario">Limpar</button>
+        </div>
+      </form>
+
+      <div class="card">
+        <h3 class="card__titulo">Médicos cadastrados</h3>
+        <div class="filtros" role="search" aria-label="Pesquisar médicos">
+          <div class="form__grupo">
+            <label class="form__rotulo" for="busca-medico">Buscar por nome ou CRM</label>
+            <input class="form__campo" type="search" id="busca-medico" placeholder="Digite para buscar">
+          </div>
+          <div class="form__grupo">
+            <label class="form__rotulo" for="filtro-especialidade">Especialidade</label>
+            <select class="form__campo" id="filtro-especialidade">
+              <option value="">Todas</option>
+              <option>Cardiologia</option>
+              <option>Clínica Geral</option>
+              <option>Dermatologia</option>
+              <option>Ginecologia</option>
+              <option>Oftalmologia</option>
+              <option>Ortopedia</option>
+              <option>Pediatria</option>
+              <option>Psiquiatria</option>
+            </select>
+          </div>
+          <div class="form__grupo">
+            <label class="form__rotulo" for="filtro-situacao">Situação</label>
+            <select class="form__campo" id="filtro-situacao">
+              <option value="ativos" selected>Ativos</option>
+              <option value="inativos">Inativos</option>
+              <option value="">Todos</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="tabela-container">
+          <table id="tabela-medicos" class="tabela">
+            <caption class="sr-only">Lista de médicos credenciados</caption>
+            <thead>
+              <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">CRM</th>
+                <th scope="col">Especialidade</th>
+                <th scope="col">Atendimento</th>
+                <th scope="col">Situação</th>
+                <th scope="col" class="tabela__acoes">Ações</th>
+              </tr>
+            </thead>
+            <!-- O JS limpa este tbody (inclusive as linhas de exemplo) e desenha a lista -->
+            <tbody id="lista-medicos">
+              <tr class="linha-exemplo">
+                <td data-rotulo="Nome">Ana Paula Ribeiro</td>
+                <td data-rotulo="CRM">123456/SP</td>
+                <td data-rotulo="Especialidade">Cardiologia</td>
+                <td data-rotulo="Atendimento">Seg, Qua, Sex · 08:00–12:00</td>
+                <td data-rotulo="Situação"><span class="badge badge--ativo">Ativo</span></td>
+                <td class="tabela__acoes">
+                  <button type="button" class="btn btn--pequeno btn--secundario btn-editar">Editar</button>
+                  <button type="button" class="btn btn--pequeno btn--perigo btn-excluir">Excluir</button>
+                </td>
+              </tr>
+              <tr class="linha-exemplo">
+                <td data-rotulo="Nome">Carlos Eduardo Lima</td>
+                <td data-rotulo="CRM">654321/SP</td>
+                <td data-rotulo="Especialidade">Pediatria</td>
+                <td data-rotulo="Atendimento">Ter, Qui · 13:00–18:00</td>
+                <td data-rotulo="Situação"><span class="badge badge--inativo">Inativo</span></td>
+                <td class="tabela__acoes">
+                  <button type="button" class="btn btn--pequeno btn--secundario btn-editar">Editar</button>
+                  <button type="button" class="btn btn--pequeno btn--perigo btn-excluir">Excluir</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p id="vazio-medicos" class="vazio is-hidden">Nenhum médico encontrado.</p>
+      </div>
+    </section>
+
+    <!-- ============ RF03 e RF04: AGENDA E AGENDAMENTO ============ -->
+    <section id="secao-agenda" class="secao" aria-labelledby="titulo-agenda">
+      <h2 id="titulo-agenda" class="secao__titulo">Agendar consulta</h2>
+
+      <form id="form-consulta" class="card form" novalidate>
+        <h3 id="titulo-form-consulta" class="form__titulo">1. Escolha o médico e o dia</h3>
+        <input type="hidden" id="consulta-id" name="id">
+
+        <div class="form__grade">
+          <div class="form__grupo">
+            <label class="form__rotulo" for="consulta-medico">Médico</label>
+            <!-- O JS preenche com os médicos ATIVOS (texto: "Nome – Especialidade") -->
+            <select class="form__campo" id="consulta-medico" name="medicoId" required>
+              <option value="">Selecione um médico</option>
+            </select>
+            <small class="form__erro" id="erro-consulta-medico"></small>
+          </div>
+
+          <div class="form__grupo">
+            <label class="form__rotulo" for="consulta-data">Data</label>
+            <input class="form__campo" type="date" id="consulta-data" name="data" required>
+            <small class="form__erro" id="erro-consulta-data"></small>
+          </div>
+        </div>
+
+        <!-- Grade de horários do médico no dia escolhido -->
+        <fieldset class="horarios">
+          <legend class="form__titulo">2. Escolha um horário disponível</legend>
+          <ul class="horarios__legenda" aria-hidden="true">
+            <li><span class="horario horario--amostra"></span> Livre</li>
+            <li><span class="horario horario--amostra horario--ocupado"></span> Ocupado</li>
+            <li><span class="horario horario--amostra horario--selecionado"></span> Selecionado</li>
+          </ul>
+          <!-- O JS desenha um botão .horario para cada horário (ver tpl-horario) -->
+          <div id="grade-horarios" class="horarios__grade">
+            <button type="button" class="horario linha-exemplo" data-hora="08:00">08:00</button>
+            <button type="button" class="horario horario--ocupado linha-exemplo" data-hora="08:30" disabled>08:30</button>
+            <button type="button" class="horario horario--selecionado linha-exemplo" data-hora="09:00" aria-pressed="true">09:00</button>
+            <button type="button" class="horario linha-exemplo" data-hora="09:30">09:30</button>
+            <button type="button" class="horario horario--ocupado linha-exemplo" data-hora="10:00" disabled>10:00</button>
+            <button type="button" class="horario linha-exemplo" data-hora="10:30">10:30</button>
+          </div>
+          <p id="grade-vazia" class="vazio is-hidden">Selecione um médico e uma data para ver os horários.</p>
+          <!-- Horário escolhido na grade -->
+          <input type="hidden" id="consulta-hora" name="hora">
+          <small class="form__erro" id="erro-consulta-hora"></small>
+        </fieldset>
+
+        <h3 class="form__titulo">3. Dados do paciente</h3>
+        <div class="form__grade">
+          <div class="form__grupo form__grupo--duplo">
+            <label class="form__rotulo" for="consulta-paciente">Nome do paciente</label>
+            <input class="form__campo" type="text" id="consulta-paciente" name="paciente" required maxlength="100">
+            <small class="form__erro" id="erro-consulta-paciente"></small>
+          </div>
+
+          <div class="form__grupo">
+            <label class="form__rotulo" for="consulta-telefone">Telefone do paciente</label>
+            <input class="form__campo" type="tel" id="consulta-telefone" name="telefone" required placeholder="(11) 99999-9999">
+            <small class="form__erro" id="erro-consulta-telefone"></small>
+          </div>
+
+          <div class="form__grupo form__grupo--largo">
+            <label class="form__rotulo" for="consulta-observacoes">Observações <span class="form__opcional">(opcional)</span></label>
+            <textarea class="form__campo" id="consulta-observacoes" name="observacoes" rows="3" maxlength="300"></textarea>
+          </div>
+        </div>
+
+        <div class="form__acoes">
+          <button type="submit" id="btn-salvar-consulta" class="btn btn--primario">Reservar consulta</button>
+          <button type="reset" id="btn-cancelar-consulta" class="btn btn--secundario">Limpar</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ============ CONSULTAS AGENDADAS ============ -->
+    <section id="secao-consultas" class="secao" aria-labelledby="titulo-consultas">
+      <h2 id="titulo-consultas" class="secao__titulo">Consultas agendadas</h2>
+
+      <div class="card">
+        <div class="filtros" role="search" aria-label="Pesquisar consultas">
+          <div class="form__grupo">
+            <label class="form__rotulo" for="busca-consulta">Buscar por paciente ou médico</label>
+            <input class="form__campo" type="search" id="busca-consulta" placeholder="Digite para buscar">
+          </div>
+          <div class="form__grupo">
+            <label class="form__rotulo" for="filtro-data">Data</label>
+            <input class="form__campo" type="date" id="filtro-data">
+          </div>
+        </div>
+
+        <div class="tabela-container">
+          <table id="tabela-consultas" class="tabela">
+            <caption class="sr-only">Lista de consultas agendadas</caption>
+            <thead>
+              <tr>
+                <th scope="col">Data</th>
+                <th scope="col">Horário</th>
+                <th scope="col">Paciente</th>
+                <th scope="col">Telefone</th>
+                <th scope="col">Médico</th>
+                <th scope="col">Especialidade</th>
+                <th scope="col" class="tabela__acoes">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="lista-consultas">
+              <tr class="linha-exemplo">
+                <td data-rotulo="Data">12/11/2026</td>
+                <td data-rotulo="Horário">08:30</td>
+                <td data-rotulo="Paciente">Marcos Antônio Souza</td>
+                <td data-rotulo="Telefone">(11) 96666-4321</td>
+                <td data-rotulo="Médico">Ana Paula Ribeiro</td>
+                <td data-rotulo="Especialidade">Cardiologia</td>
+                <td class="tabela__acoes">
+                  <button type="button" class="btn btn--pequeno btn--secundario btn-editar">Editar</button>
+                  <button type="button" class="btn btn--pequeno btn--perigo btn-excluir">Cancelar</button>
+                </td>
+              </tr>
+              <tr class="linha-exemplo">
+                <td data-rotulo="Data">12/11/2026</td>
+                <td data-rotulo="Horário">10:00</td>
+                <td data-rotulo="Paciente">Juliana Costa</td>
+                <td data-rotulo="Telefone">(11) 95555-8765</td>
+                <td data-rotulo="Médico">Ana Paula Ribeiro</td>
+                <td data-rotulo="Especialidade">Cardiologia</td>
+                <td class="tabela__acoes">
+                  <button type="button" class="btn btn--pequeno btn--secundario btn-editar">Editar</button>
+                  <button type="button" class="btn btn--pequeno btn--perigo btn-excluir">Cancelar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p id="vazio-consultas" class="vazio is-hidden">Nenhuma consulta encontrada.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p>MedAgenda · Projeto Integrador – Boas Práticas de Desenvolvimento de Software · Senac EAD · 2026</p>
+    <p class="rodape__grupo">Felipe Marchesini Balikian · Isaac Rodrigues Vieira · Nicolas Ambar · Rubia Massaud dos Santos · Vanderson Luiz Cardoso Martins</p>
+  </footer>
+
+  <!-- Modelos: o JS clona, preenche os [data-campo] e insere na página -->
+  <template id="tpl-linha-medico">
+    <tr>
+      <td data-rotulo="Nome" data-campo="nome"></td>
+      <td data-rotulo="CRM" data-campo="crm"></td>
+      <td data-rotulo="Especialidade" data-campo="especialidade"></td>
+      <td data-rotulo="Atendimento" data-campo="atendimento"></td>
+      <td data-rotulo="Situação"><span class="badge" data-campo="situacao"></span></td>
+      <td class="tabela__acoes">
+        <button type="button" class="btn btn--pequeno btn--secundario btn-editar">Editar</button>
+        <button type="button" class="btn btn--pequeno btn--perigo btn-excluir">Excluir</button>
+      </td>
+    </tr>
+  </template>
+
+  <template id="tpl-linha-consulta">
+    <tr>
+      <td data-rotulo="Data" data-campo="data"></td>
+      <td data-rotulo="Horário" data-campo="hora"></td>
+      <td data-rotulo="Paciente" data-campo="paciente"></td>
+      <td data-rotulo="Telefone" data-campo="telefone"></td>
+      <td data-rotulo="Médico" data-campo="medico"></td>
+      <td data-rotulo="Especialidade" data-campo="especialidade"></td>
+      <td class="tabela__acoes">
+        <button type="button" class="btn btn--pequeno btn--secundario btn-editar">Editar</button>
+        <button type="button" class="btn btn--pequeno btn--perigo btn-excluir">Cancelar</button>
+      </td>
+    </tr>
+  </template>
+
+  <template id="tpl-horario">
+    <button type="button" class="horario" data-hora="">00:00</button>
+  </template>
+
+  <script src="js/app.js" defer></script>
+</body>
+</html>

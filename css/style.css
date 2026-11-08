@@ -1,0 +1,611 @@
+/* =========================================================
+   MedAgenda – estilos
+   Organização: 1. Variáveis  2. Base  3. Layout  4. Componentes
+                5. Estados usados pelo JS  6. Responsivo
+   Abordagem mobile-first: o estilo base é para celular e as
+   media queries acrescentam ajustes para telas maiores.
+   ========================================================= */
+
+/* ---------- 1. Variáveis (cores, espaços e bordas num lugar só) ---------- */
+:root {
+  --cor-primaria: #0b6e69;
+  --cor-primaria-escura: #084f4b;
+  --cor-primaria-clara: #e2f1ef;
+  --cor-fundo: #f4f7f7;
+  --cor-superficie: #ffffff;
+  --cor-texto: #1b2a29;
+  --cor-texto-suave: #586a69;
+  --cor-borda: #d3dfde;
+  --cor-sucesso: #1d7a45;
+  --cor-sucesso-fundo: #e3f3e9;
+  --cor-erro: #b42318;
+  --cor-erro-fundo: #fdece9;
+  --cor-inativo: #6b7473;
+  --cor-inativo-fundo: #eceff0;
+
+  --fonte: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --espaco-1: 0.25rem;
+  --espaco-2: 0.5rem;
+  --espaco-3: 0.75rem;
+  --espaco-4: 1rem;
+  --espaco-5: 1.5rem;
+  --espaco-6: 2rem;
+  --raio: 8px;
+  --sombra: 0 1px 3px rgba(16, 40, 39, 0.08);
+}
+
+/* ---------- 2. Base ---------- */
+html {
+  scroll-behavior: smooth; /* rolagem suave ao clicar no menu */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--fonte);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--cor-texto);
+  background: var(--cor-fundo);
+}
+
+h2,
+h3 {
+  line-height: 1.25;
+  margin: 0;
+}
+
+a {
+  color: var(--cor-primaria);
+}
+
+/* Contorno visível para quem navega pelo teclado */
+:focus-visible {
+  outline: 3px solid var(--cor-primaria);
+  outline-offset: 2px;
+}
+
+/* Esconde visualmente, mas mantém para leitores de tela */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.pular-conteudo {
+  position: absolute;
+  left: var(--espaco-4);
+  top: -3rem;
+  padding: var(--espaco-2) var(--espaco-4);
+  background: var(--cor-primaria);
+  color: #fff;
+  border-radius: var(--raio);
+  z-index: 10;
+}
+
+.pular-conteudo:focus {
+  top: var(--espaco-2);
+}
+
+/* ---------- 3. Layout ---------- */
+.cabecalho {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--cor-superficie);
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.cabecalho__interno,
+.conteudo {
+  max-width: 1100px;
+  margin-inline: auto;
+  padding-inline: var(--espaco-4);
+}
+
+.cabecalho__interno {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-2) var(--espaco-4);
+  padding-block: var(--espaco-3);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  text-decoration: none;
+  color: var(--cor-texto);
+}
+
+.logo__marca {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--raio);
+  background: var(--cor-primaria);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.logo__nome {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.menu {
+  display: flex;
+  gap: var(--espaco-1);
+}
+
+.menu__link {
+  padding: var(--espaco-2) var(--espaco-3);
+  border-radius: var(--raio);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.menu__link:hover {
+  background: var(--cor-primaria-clara);
+}
+
+.conteudo {
+  padding-block: var(--espaco-5) var(--espaco-6);
+}
+
+.conteudo__intro {
+  margin: 0 0 var(--espaco-5);
+  color: var(--cor-texto-suave);
+}
+
+.secao {
+  display: grid;
+  gap: var(--espaco-4);
+  margin-bottom: var(--espaco-6);
+  scroll-margin-top: 5rem; /* não fica escondida atrás do cabeçalho fixo */
+}
+
+.secao__titulo {
+  font-size: 1.5rem;
+}
+
+.rodape {
+  padding: var(--espaco-5) var(--espaco-4);
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--cor-texto-suave);
+  border-top: 1px solid var(--cor-borda);
+}
+
+.rodape p {
+  margin: 0 0 var(--espaco-1);
+}
+
+/* ---------- 4. Componentes ---------- */
+
+/* Card: bloco branco que agrupa formulário ou lista */
+.card {
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  padding: var(--espaco-4);
+  box-shadow: var(--sombra);
+}
+
+.card__titulo {
+  font-size: 1.125rem;
+  margin-bottom: var(--espaco-3);
+}
+
+/* Formulários */
+.form {
+  display: grid;
+  gap: var(--espaco-4);
+}
+
+.form__titulo {
+  font-size: 1.125rem;
+  font-weight: 700;
+  padding: 0;
+}
+
+.form__grade {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--espaco-4);
+}
+
+.form__grupo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-1);
+  min-width: 0;
+}
+
+.form__rotulo {
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+.form__opcional {
+  font-weight: 400;
+  color: var(--cor-texto-suave);
+}
+
+.form__campo {
+  width: 100%;
+  padding: var(--espaco-2) var(--espaco-3);
+  font: inherit;
+  color: inherit;
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+}
+
+.form__campo:focus {
+  border-color: var(--cor-primaria);
+}
+
+textarea.form__campo {
+  resize: vertical;
+}
+
+.form__erro {
+  min-height: 1.1em;
+  font-size: 0.8125rem;
+  color: var(--cor-erro);
+}
+
+.form__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-2);
+}
+
+/* Dias de atendimento (checkboxes) */
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.dias__opcoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-2);
+}
+
+.dias__dia,
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  cursor: pointer;
+}
+
+.dias__dia {
+  padding: var(--espaco-2) var(--espaco-3);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+}
+
+.dias__dia:has(input:checked) {
+  background: var(--cor-primaria-clara);
+  border-color: var(--cor-primaria);
+}
+
+.form__grupo--check {
+  justify-content: flex-end;
+}
+
+/* Botões */
+.btn {
+  padding: var(--espaco-2) var(--espaco-4);
+  font: inherit;
+  font-weight: 600;
+  border: 1px solid transparent;
+  border-radius: var(--raio);
+  cursor: pointer;
+}
+
+.btn--primario {
+  background: var(--cor-primaria);
+  color: #fff;
+}
+
+.btn--primario:hover {
+  background: var(--cor-primaria-escura);
+}
+
+.btn--secundario {
+  background: var(--cor-superficie);
+  color: var(--cor-primaria);
+  border-color: var(--cor-primaria);
+}
+
+.btn--secundario:hover {
+  background: var(--cor-primaria-clara);
+}
+
+.btn--perigo {
+  background: var(--cor-superficie);
+  color: var(--cor-erro);
+  border-color: var(--cor-erro);
+}
+
+.btn--perigo:hover {
+  background: var(--cor-erro-fundo);
+}
+
+.btn--pequeno {
+  padding: var(--espaco-1) var(--espaco-3);
+  font-size: 0.875rem;
+}
+
+/* Filtros de pesquisa */
+.filtros {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--espaco-3);
+  margin-bottom: var(--espaco-4);
+}
+
+/* Tabelas */
+.tabela-container {
+  overflow-x: auto;
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+
+.tabela th,
+.tabela td {
+  padding: var(--espaco-3);
+  text-align: left;
+  border-bottom: 1px solid var(--cor-borda);
+  vertical-align: middle;
+}
+
+.tabela th {
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--cor-texto-suave);
+  background: var(--cor-fundo);
+}
+
+.tabela__acoes {
+  white-space: nowrap;
+}
+
+.tabela__acoes .btn + .btn {
+  margin-left: var(--espaco-1);
+}
+
+.vazio {
+  margin: var(--espaco-4) 0 0;
+  text-align: center;
+  color: var(--cor-texto-suave);
+}
+
+/* Etiquetas de situação */
+.badge {
+  display: inline-block;
+  padding: 0.125rem var(--espaco-2);
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.badge--ativo {
+  background: var(--cor-sucesso-fundo);
+  color: var(--cor-sucesso);
+}
+
+.badge--inativo {
+  background: var(--cor-inativo-fundo);
+  color: var(--cor-inativo);
+}
+
+/* Grade de horários da agenda */
+.horarios {
+  display: grid;
+  gap: var(--espaco-3);
+}
+
+.horarios__legenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.875rem;
+  color: var(--cor-texto-suave);
+}
+
+.horarios__legenda li {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-2);
+}
+
+.horarios__grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(5rem, 1fr));
+  gap: var(--espaco-2);
+}
+
+.horario {
+  padding: var(--espaco-2);
+  font: inherit;
+  font-weight: 600;
+  color: var(--cor-primaria);
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-primaria);
+  border-radius: var(--raio);
+  cursor: pointer;
+}
+
+.horario:hover:not(:disabled) {
+  background: var(--cor-primaria-clara);
+}
+
+.horario--amostra {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  padding: 0;
+  cursor: default;
+}
+
+/* ---------- 5. Estados controlados pelo JavaScript ---------- */
+
+/* Esconde qualquer elemento (mensagens, listas vazias etc.) */
+.is-hidden {
+  display: none !important;
+}
+
+/* Campo com erro de validação */
+.form__campo.is-invalido {
+  border-color: var(--cor-erro);
+  background: var(--cor-erro-fundo);
+}
+
+/* Horário já reservado: não pode ser escolhido */
+.horario--ocupado {
+  color: var(--cor-inativo);
+  background: var(--cor-inativo-fundo);
+  border-color: var(--cor-borda);
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+
+/* Horário escolhido pelo usuário */
+.horario--selecionado,
+.horario--selecionado:hover:not(:disabled) {
+  color: #fff;
+  background: var(--cor-primaria);
+}
+
+/* Mensagens de retorno ao usuário */
+.mensagem {
+  margin-bottom: var(--espaco-4);
+  padding: var(--espaco-3) var(--espaco-4);
+  border-radius: var(--raio);
+  border: 1px solid transparent;
+  font-weight: 600;
+}
+
+.mensagem--sucesso {
+  background: var(--cor-sucesso-fundo);
+  border-color: var(--cor-sucesso);
+  color: var(--cor-sucesso);
+}
+
+.mensagem--erro {
+  background: var(--cor-erro-fundo);
+  border-color: var(--cor-erro);
+  color: var(--cor-erro);
+}
+
+/* Linha que está sendo editada no formulário */
+.tabela tr.is-editando td {
+  background: var(--cor-primaria-clara);
+}
+
+/* ---------- 6. Responsivo ---------- */
+
+/* Celular: cada linha da tabela vira um cartão.
+   O nome da coluna vem do atributo data-rotulo de cada <td>. */
+@media (max-width: 719px) {
+  .tabela thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .tabela tr {
+    display: block;
+    padding: var(--espaco-2) 0;
+    border-bottom: 1px solid var(--cor-borda);
+  }
+
+  .tabela td {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--espaco-4);
+    padding: var(--espaco-1) 0;
+    border: 0;
+    text-align: right;
+  }
+
+  .tabela td::before {
+    content: attr(data-rotulo);
+    font-weight: 600;
+    color: var(--cor-texto-suave);
+    text-align: left;
+  }
+
+  .tabela td.tabela__acoes {
+    justify-content: flex-end;
+    padding-top: var(--espaco-2);
+  }
+}
+
+/* Tablet em diante */
+@media (min-width: 640px) {
+  .form__grade {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* --largo ocupa a linha inteira; --duplo ocupa 2 colunas no computador */
+  .form__grupo--largo,
+  .form__grupo--duplo {
+    grid-column: 1 / -1;
+  }
+
+  .filtros {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+
+  .card {
+    padding: var(--espaco-5);
+  }
+}
+
+/* Computador */
+@media (min-width: 960px) {
+  .form__grade {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .form__grupo--duplo {
+    grid-column: span 2;
+  }
+}
+
+/* Respeita quem prefere menos animação */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
