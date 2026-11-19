@@ -41,7 +41,7 @@ function carregarMedicos() {
 
     return Array.isArray(medicos) ? medicos : [];
   } catch (erro) {
-    console.error("Erro ao carregar medicos:", erro);
+    console.error("Erro ao carregar médicos:", erro);
     return [];
   }
 }
@@ -53,7 +53,7 @@ function salvarMedicos(medicos) {
 
     return true;
   } catch (erro) {
-    console.error("Erro ao salvar medicos:", erro);
+    console.error("Erro ao salvar médicos:", erro);
     return false;
   }
 }
@@ -123,7 +123,7 @@ function cadastrarMedico(evento) {
   );
 
   if (crmExistente) {
-    mostrarErro("crm", "Ja existe um medico cadastrado com este CRM.");
+    mostrarErro("crm", "Já existe um médico cadastrado com este CRM.");
     return;
   }
 
@@ -145,7 +145,7 @@ function cadastrarMedico(evento) {
   }
 
   if (!salvarMedicos(listaAtualizada)) {
-    exibirMensagem("Nao foi possivel salvar os dados do medico.", "erro");
+    exibirMensagem("Não foi possível salvar os dados do médico.", "erro");
     return;
   }
 
@@ -157,9 +157,9 @@ function cadastrarMedico(evento) {
   atualizarAgendaMedicos();
 
   if (idEmEdicao) {
-    exibirMensagem("Medico atualizado com sucesso!", "sucesso");
+    exibirMensagem("Médico atualizado com sucesso!", "sucesso");
   } else {
-    exibirMensagem("Medico cadastrado com sucesso!", "sucesso");
+    exibirMensagem("Médico cadastrado com sucesso!", "sucesso");
   }
 
   console.log("Lista de medicos atualizada:", medicos);
@@ -183,11 +183,11 @@ function formatarDiasAtendimento(dias) {
     qua: "Qua",
     qui: "Qui",
     sex: "Sex",
-    sab: "Sab",
+    sab: "Sáb",
   };
 
   if (!Array.isArray(dias) || dias.length === 0) {
-    return "Nao informado";
+    return "Não informado";
   }
 
   return dias.map((dia) => nomesDias[dia] || dia).join(", ");
@@ -216,7 +216,7 @@ function preencherCampo(linha, campo, valor) {
 // Renderiza os medicos na tabela
 function renderizarMedicos() {
   if (!listaMedicos || !templateMedico) {
-    console.error("Elementos da tabela nao encontrados.");
+    console.error("Elementos da tabela não encontrados.");
     return;
   }
 
@@ -310,7 +310,7 @@ function validarMedico(medico) {
   let valido = true;
 
   if (!medico.nome) {
-    mostrarErro("nome", "Informe o nome do medico.");
+    mostrarErro("nome", "Informe o nome do médico.");
     valido = false;
   } else if (medico.nome.length < 3) {
     mostrarErro("nome", "Informe um nome com pelo menos 3 caracteres.");
@@ -318,7 +318,7 @@ function validarMedico(medico) {
   }
 
   if (!medico.crm) {
-    mostrarErro("crm", "Informe o CRM do medico.");
+    mostrarErro("crm", "Informe o CRM do médico.");
     valido = false;
   } else if (!/^\d{4,6}\/[A-Za-z]{2}$/.test(medico.crm)) {
     mostrarErro("crm", "Informe o CRM no formato 123456/SP.");
@@ -333,15 +333,15 @@ function validarMedico(medico) {
   const telefoneNumeros = medico.telefone.replace(/\D/g, "");
 
   if (!medico.telefone) {
-    mostrarErro("telefone", "Informe o telefone do medico.");
+    mostrarErro("telefone", "Informe o telefone do médico.");
     valido = false;
   } else if (telefoneNumeros.length < 10 || telefoneNumeros.length > 11) {
-    mostrarErro("telefone", "Informe um telefone valido com DDD.");
+    mostrarErro("telefone", "Informe um telefone válido com DDD.");
     valido = false;
   }
 
   if (medico.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(medico.email)) {
-    mostrarErro("email", "Informe um e-mail valido.");
+    mostrarErro("email", "Informe um e-mail válido.");
     valido = false;
   }
 
@@ -356,7 +356,7 @@ function validarMedico(medico) {
   }
 
   if (!medico.horaInicio) {
-    mostrarErro("inicio", "Informe o inicio do atendimento.");
+    mostrarErro("inicio", "Informe o início do atendimento.");
     valido = false;
   }
 
@@ -370,7 +370,7 @@ function validarMedico(medico) {
     medico.horaFim &&
     medico.horaFim <= medico.horaInicio
   ) {
-    mostrarErro("fim", "O fim do atendimento deve ser depois do inicio.");
+    mostrarErro("fim", "O fim do atendimento deve ser depois do início.");
     valido = false;
   }
 
@@ -413,7 +413,7 @@ function editarMedico(id) {
   const medico = medicos.find((item) => item.id === id);
 
   if (!medico) {
-    exibirMensagem("Medico nao encontrado.", "erro");
+    exibirMensagem("Médico não encontrado.", "erro");
     return;
   }
 
@@ -480,12 +480,12 @@ function excluirMedico(id) {
   const medico = medicos.find((item) => item.id === id);
 
   if (!medico) {
-    exibirMensagem("Medico nao encontrado.", "erro");
+    exibirMensagem("Médico não encontrado.", "erro");
     return;
   }
 
   const confirmar = confirm(
-    `Deseja realmente excluir o medico ${medico.nome}?`,
+    `Deseja realmente excluir o médico ${medico.nome}?`,
   );
 
   if (!confirmar) {
@@ -495,7 +495,7 @@ function excluirMedico(id) {
   const listaAtualizada = medicos.filter((item) => item.id !== id);
 
   if (!salvarMedicos(listaAtualizada)) {
-    exibirMensagem("Nao foi possivel excluir o medico.", "erro");
+    exibirMensagem("Não foi possível excluir o médico.", "erro");
     return;
   }
 
@@ -513,7 +513,7 @@ function excluirMedico(id) {
   renderizarMedicos();
   renderizarConsultas();
   atualizarAgendaMedicos();
-  exibirMensagem("Medico excluido com sucesso!", "sucesso");
+  exibirMensagem("Médico excluído com sucesso!", "sucesso");
 }
 
 // ==========================================
