@@ -36,15 +36,18 @@ medagenda/
 
 ## Cronograma da 2ª etapa
 
-| Fase | Prazo | Tarefa | Responsável |
-|---|---|---|---|
-| 1 | 04/11 a 07/11 | Estrutura inicial do front-end (`index.html` e `style.css`) | Felipe |
-| 2 | 08/11 a 14/11 | Lógica principal JS (cadastro, lista, LocalStorage) | Vanderson |
-| 2 | 08/11 a 14/11 | Lógica complementar JS (edição, exclusão, pesquisa e validação) | Nicolas |
-| 3 | 15/11 a 18/11 | Tabela de testes funcionais, prints e/ou vídeo | Isaac |
-| 4 | 19/11 a 21/11 | Documento PDF com as boas práticas aplicadas e a conclusão | Rubia |
-| 5 | 22/11 a 23/11 | Apresentação final e consolidação do PDF | Felipe |
-| 5 | 23/11 | Envio oficial no AVA (até 23h59) | Felipe e grupo |
+| Fase | Prazo | Tarefa | Responsável | Dependência | Status |
+|---|---|---|---|---|---|
+| 1 | 04/11 a 07/11 | Estrutura inicial do front-end (`index.html` e `style.css`) | Felipe | Início do projeto | Concluído |
+| 2 | 08/11 a 14/11 | Lógica principal JS (cadastro, lista, LocalStorage) | Vanderson | Estrutura HTML/CSS (Felipe) | Concluído |
+| 2 | 08/11 a 14/11 | Lógica complementar JS (edição, exclusão, pesquisa e validação) | Nicolas | Lógica principal (Vanderson) e HTML (Felipe) | Concluído |
+| 3 | 15/11 a 18/11 | Tabela de testes funcionais, prints e/ou vídeo | Isaac | Finalização total da lógica JS e do front-end | Concluído |
+| 4 | 19/11 a 21/11 | Redação do documento PDF detalhando as boas práticas aplicadas e a conclusão do projeto | Rubia | Código e testes finalizados | Pendente |
+| 5 | 22/11 a 23/11 | Montar apresentação final e consolidar o PDF | Felipe | Redação do documento finalizada | Pendente |
+| 5 | 23/11 | Envio oficial do PDF no AVA (prazo limite: 23h59) | Felipe e todo o grupo | Aprovação final do PDF pelo grupo | Pendente |
+| Geral | Até 23/11 | Registro contínuo das atividades da 2ª etapa no blog do grupo | Rubia | Acompanhamento das fases | Pendente |
+
+> Status atualizado em 19/11/2026, conforme a planilha de controle de tarefas do grupo.
 
 ## Mapa de IDs para o JavaScript (Fase 2)
 
