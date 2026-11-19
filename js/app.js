@@ -71,9 +71,6 @@ const filtroEspecialidade = document.getElementById("filtro-especialidade");
 const filtroSituacao = document.getElementById("filtro-situacao");
 const mensagem = document.getElementById("mensagem");
 
-console.log("MedAgenda - JavaScript carregado");
-console.log("Medicos armazenados:", medicos);
-
 // ==========================================
 // CADASTRO DE MEDICOS
 // Responsavel: Vanderson Luiz C. Martins
@@ -161,8 +158,6 @@ function cadastrarMedico(evento) {
   } else {
     exibirMensagem("Médico cadastrado com sucesso!", "sucesso");
   }
-
-  console.log("Lista de medicos atualizada:", medicos);
 }
 
 // Conecta o formulario ao cadastro
@@ -259,8 +254,6 @@ function renderizarMedicos() {
 
     listaMedicos.appendChild(fragmento);
   });
-
-  console.log(`Listagem atualizada: ${medicosFiltrados.length} medico(s).`);
 }
 
 // ==========================================
