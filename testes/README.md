@@ -1,21 +1,37 @@
 # MedAgenda — Fase 3: Testes funcionais
 
 **Responsável:** Isaac Rodrigues Vieira  
-**Período previsto:** 15/11/2026 a 18/11/2026  
-**Projeto:** MedAgenda — Projeto Integrador Senac
+**Projeto:** Projeto Integrador — Senac EAD, Boas Práticas de Desenvolvimento de Software  
+**Período previsto:** 15 a 18/11/2026
 
-## Entrega
+## Conteúdo deste pacote
 
-- [Matriz de 28 testes funcionais](testes-funcionais.md): casos para RF01–RF05, procedimentos e resultados esperados.
-- [Relatório da fase](relatorio-fase3.md): objetivo, escopo, metodologia e critérios de conclusão.
-- [Vídeo dos testes](VIDEO.md): local para registrar o arquivo ou o link da gravação.
-- [`evidencias/`](evidencias/): pasta opcional para capturas reais da execução.
+- [`testes-funcionais.md`](testes-funcionais.md): matriz de 28 casos, com resultados informados e detalhes das rotinas existentes no GitHub.
+- [`relatorio-fase3.md`](relatorio-fase3.md): relatório ampliado, incluindo descrição por requisito funcional, resultados, análise técnica, pontos de atenção e conclusão.
+- [`VIDEO.md`](VIDEO.md): acesso à gravação existente no repositório.
+- [`evidencias/`](evidencias/): capturas disponibilizadas para documentar parcialmente os fluxos.
 
-> **Status da documentação:** os testes foram planejados e o responsável informou ter gravado a demonstração. Os resultados individuais ainda precisam ser conferidos no vídeo e registrados na matriz; não há aprovação presumida.
+## Resultado da etapa
 
-## Próximos passos
+**28 casos executados e aprovados, sem falhas relatadas — conforme informação do responsável pela execução.**
 
-1. Colocar o vídeo gravado em `evidencias/testes-funcionais-isaac.mp4` (ou editar `VIDEO.md` com um link acessível).
-2. Assistir à gravação e atualizar cada caso como **Aprovado**, **Reprovado**, **Bloqueado** ou **Não demonstrado**.
-3. Se houver prints, colocar os arquivos na pasta `evidencias/` e referenciá-los na matriz.
-4. Abrir um Pull Request, se o grupo estiver trabalhando com revisão de alterações.
+As imagens recebidas demonstram partes dos cenários TF01, TF14, TF16 e TF19; existe também uma imagem de mensagem de validação relacionada a TF23. Os demais resultados não foram verificados de forma independente por prints.
+
+## O que funciona segundo o código e a documentação do projeto
+
+- Cadastro, edição, exclusão e validação de médicos.
+- Pesquisa de médicos por nome/CRM e filtros de especialidade e situação.
+- Montagem da agenda conforme dias, horários e duração de consultas.
+- Agendamento de consultas com validações de data, disponibilidade e dados do paciente.
+- Consulta, edição, cancelamento, pesquisa e filtros dos agendamentos.
+- Persistência local dos registros de médicos e consultas com LocalStorage.
+
+**Fonte:** [`Senac-09/medagenda`](https://github.com/Senac-09/medagenda), com revisão de `README.md`, `index.html` e `js/app.js` da branch `main` em 19/11/2026.
+
+## Uso no repositório
+
+Coloque estes arquivos na pasta `testes/` do projeto, mantendo as capturas em `testes/evidencias/`. O vídeo `testes-funcionais-isaac.mp4` já existe na mesma pasta do GitHub e **não precisa ser enviado novamente**. O ZIP não contém o vídeo.
+
+## Nota sobre os status
+
+Os 28 casos têm status **Aprovado** com base no relato do responsável. As referências ao código descrevem a implementação e não devem ser confundidas com prova visual de execução de cada teste.

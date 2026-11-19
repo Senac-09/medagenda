@@ -1,24 +1,19 @@
 # Gravação dos testes funcionais — MedAgenda
 
 **Responsável:** Isaac Rodrigues Vieira  
-**Data da gravação:** 16/11/2026  
-**Navegador utilizado:** Google Chrome  
+**Data informada da gravação:** 16/11/2026  
+**Navegador:** Google Chrome
 
+## Gravação disponível no repositório
 
-## Acesso à gravação
+[Assistir à gravação dos testes funcionais](https://github.com/Senac-09/medagenda/blob/main/testes/evidencias/testes-funcionais-isaac.mp4)
 
-**Vídeo gravado em:** 16/11/2026, no Google Chrome.  
-**Arquivo previsto:** [`evidencias/testes-funcionais-isaac.mp4`](evidencias/testes-funcionais-isaac.mp4)
+**Caminho no projeto:** `testes/evidencias/testes-funcionais-isaac.mp4`
 
-> O responsável informou que já gravou a demonstração. O vídeo precisa ser colocado manualmente na pasta `evidencias/` antes do envio. O conteúdo da gravação ainda não foi conferido nesta documentação.
+A gravação já consta na pasta `testes/evidencias/` do GitHub. Ela **não está incluída no pacote ZIP** de atualização da documentação.
 
-## Funcionalidades a conferir na gravação
+## Capturas anexadas a esta entrega
 
-- Cadastro, edição e exclusão de médicos
-- Validações dos campos
-- Pesquisa e filtros
-- Disponibilidade de horários
-- Agendamento, edição e cancelamento de consultas
-- Persistência dos dados ao atualizar a página
+As imagens em [`evidencias/`](evidencias/) documentam parte dos fluxos de cadastro de médico, filtro de especialidade, grade de horários e agendamento; uma imagem adicional apresenta uma mensagem de validação do telefone do paciente.
 
-Registrar na [matriz de testes](testes-funcionais.md) apenas o que a gravação comprovar.
+O responsável informou aprovação dos 28 casos. Esta revisão documental baseou-se nas capturas recebidas e na leitura do código disponível no GitHub; a gravação não foi inspecionada quadro a quadro. Por isso, não se afirma que todos os procedimentos estejam demonstrados no vídeo.
