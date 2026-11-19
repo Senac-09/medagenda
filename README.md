@@ -118,25 +118,29 @@ Os botões das linhas usam as classes `btn-editar` e `btn-excluir`. Sugestão: g
 | `mensagem--sucesso` / `mensagem--erro` | Cor da mensagem |
 | `linha-exemplo` | Linhas e horários de demonstração da Fase 1. **O JS deve removê-los** ao desenhar a lista |
 
-## Modelo de dados sugerido (LocalStorage)
+## Modelo de dados (LocalStorage)
 
-Duas chaves, cada uma com uma lista em JSON:
+Duas chaves, cada uma com uma lista em JSON. Os campos abaixo são os que o `js/app.js` grava de fato:
 
 ```js
 // localStorage "medagenda.medicos"
-{ id: "m1731000000000", nome: "Ana Paula Ribeiro", crm: "123456/SP",
+{ id: "3f2b8c1e-5a7d-4c2e-9b1f-0d6a8e4c7b21", // gerado com crypto.randomUUID()
+  nome: "Ana Paula Ribeiro", crm: "123456/SP",
   especialidade: "Cardiologia", telefone: "(11) 98888-1234", email: "",
-  dias: ["seg", "qua", "sex"], inicio: "08:00", fim: "12:00",
-  duracao: 30, ativo: true }
+  diasAtendimento: ["seg", "qua", "sex"], horaInicio: "08:00", horaFim: "12:00",
+  duracaoConsulta: 30, ativo: true }
 
 // localStorage "medagenda.consultas"
-{ id: "c1731000000001", medicoId: "m1731000000000", data: "2026-11-12",
-  hora: "08:30", paciente: "Marcos Antônio Souza",
+{ id: "9a1c4e7f-2b3d-4f5a-8c6e-1d2b3a4c5e6f", // gerado com crypto.randomUUID()
+  medicoId: "3f2b8c1e-5a7d-4c2e-9b1f-0d6a8e4c7b21",
+  medico: "Ana Paula Ribeiro", especialidade: "Cardiologia", // cópia para exibir na lista
+  data: "2026-11-12", hora: "08:30", paciente: "Marcos Antônio Souza",
   telefone: "(11) 96666-4321", observacoes: "" }
 ```
 
-- **Horários livres:** do `inicio` ao `fim`, de `duracao` em `duracao` minutos; está ocupado se já existe consulta com o mesmo `medicoId`, `data` e `hora`.
-- **Dia da semana:** `new Date("2026-11-12")` é lido como UTC e pode cair no dia anterior no Brasil. Use `new Date(ano, mes - 1, dia)` antes de chamar `getDay()` (0 = domingo, 1 = segunda…).
+- **Horários livres:** de `horaInicio` a `horaFim`, de `duracaoConsulta` em `duracaoConsulta` minutos; está ocupado se já existe consulta com o mesmo `medicoId`, `data` e `hora`.
+- **Exclusão de médico:** remove também as consultas com o mesmo `medicoId`.
+- **Dia da semana:** `new Date("2026-11-12")` é lido como UTC e pode cair no dia anterior no Brasil. O código usa `new Date("2026-11-12T00:00:00")` (horário local) antes de chamar `getDay()` (0 = domingo, 1 = segunda…).
 
 ## Convenções do grupo
 
