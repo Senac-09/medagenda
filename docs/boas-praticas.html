@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>MedAgenda – 2ª etapa – Boas práticas aplicadas e conclusão</title>
+<style>
+  @page {
+    size: A4;
+    margin: 2.5cm 2cm 2.2cm 2.5cm;
+    @bottom-right { content: counter(page); font: 9pt Arial, sans-serif; color: #586a69; }
+    @bottom-left { content: "MedAgenda · 2ª etapa – Boas práticas e conclusão"; font: 9pt Arial, sans-serif; color: #586a69; }
+  }
+  @page :first { @bottom-right { content: none; } @bottom-left { content: none; } }
+  body { font: 11pt/1.5 Arial, Helvetica, sans-serif; color: #1b2a29; }
+  h1, h2, h3 { color: #084f4b; line-height: 1.25; }
+  h2 { font-size: 15pt; margin: 22pt 0 8pt; padding-bottom: 3pt; border-bottom: 1.5pt solid #0b6e69; page-break-after: avoid; }
+  h3 { font-size: 12pt; margin: 14pt 0 5pt; page-break-after: avoid; }
+  p { margin: 0 0 7pt; text-align: justify; }
+  ul { margin: 0 0 8pt; padding-left: 16pt; }
+  li { margin-bottom: 3pt; }
+  code { font: 9.5pt "DejaVu Sans Mono", Consolas, monospace; background: #e2f1ef; padding: 0 2pt; border-radius: 2pt; }
+  table { width: 100%; border-collapse: collapse; margin: 6pt 0 12pt; font-size: 9.5pt; page-break-inside: auto; }
+  tr { page-break-inside: avoid; }
+  th { background: #0b6e69; color: #fff; text-align: left; padding: 4pt 6pt; }
+  td { border-bottom: 0.5pt solid #d3dfde; padding: 4pt 6pt; vertical-align: top; }
+  tbody tr:nth-child(even) td { background: #f4f7f7; }
+
+  .capa { height: 24cm; display: flex; flex-direction: column; text-align: center; page-break-after: always; }
+  .capa__topo { font-size: 12pt; font-weight: bold; text-transform: uppercase; }
+  .capa__meio { margin-top: 6cm; }
+  .capa__meio h1 { font-size: 24pt; margin: 0 0 10pt; }
+  .capa__meio .sub { font-size: 14pt; color: #586a69; }
+  .capa__grupo { margin-top: 3.5cm; font-size: 11pt; line-height: 1.7; }
+  .capa__rodape { margin-top: auto; font-size: 11pt; }
+
+  .nota { border-left: 3pt solid #0b6e69; background: #e2f1ef; padding: 6pt 10pt; margin: 8pt 0 12pt; font-size: 10pt; }
+  .nota--alerta { border-color: #b42318; background: #fdece9; }
+  .sumario li { list-style: none; margin-bottom: 2pt; }
+  .sumario { padding-left: 0; }
+</style>
+</head>
+<body>
+
+<section class="capa">
+  <div class="capa__topo">Senac EAD<br>Projeto Integrador – Boas Práticas de Desenvolvimento de Software</div>
+  <div class="capa__meio">
+    <h1>MedAgenda</h1>
+    <div class="sub">2ª etapa – Boas práticas aplicadas e conclusão</div>
+  </div>
+  <div class="capa__grupo">
+    <strong>Grupo:</strong><br>
+    Felipe Marchesini Balikian<br>
+    Isaac Rodrigues Vieira<br>
+    Nicolas Ambar<br>
+    Rubia Massaud dos Santos<br>
+    Vanderson Luiz Cardoso Martins<br><br>
+    <strong>Responsável por este documento:</strong> Rubia Massaud dos Santos
+  </div>
+  <div class="capa__rodape">Novembro de 2026<br>Repositório: github.com/Senac-09/medagenda</div>
+</section>
+
+<h2>Sumário</h2>
+<ul class="sumario">
+  <li>1. Introdução</li>
+  <li>2. Organização do trabalho e versionamento</li>
+  <li>3. Padrões de código e convenções</li>
+  <li>4. Boas práticas no HTML</li>
+  <li>5. Boas práticas no CSS</li>
+  <li>6. Boas práticas no JavaScript</li>
+  <li>7. Documentação e testes</li>
+  <li>8. Quadro-resumo: prática × evidência no projeto</li>
+  <li>9. Pontos de melhoria identificados</li>
+  <li>10. Conclusão</li>
+</ul>
+
+<h2>1. Introdução</h2>
+<p>O MedAgenda é uma aplicação web para cadastrar médicos credenciados e agendar consultas em pequenas clínicas e cooperativas médicas. Foi construída com HTML5, CSS3 e JavaScript puro, e os dados ficam salvos no próprio navegador por meio do <code>localStorage</code>. A aplicação atende a cinco requisitos funcionais: gerenciar médicos (RF01), pesquisar médicos por nome, CRM, especialidade e situação (RF02), visualizar a agenda de horários (RF03), realizar agendamentos (RF04) e armazenar os dados no navegador (RF05).</p>
+<p>Este documento reúne as boas práticas de desenvolvimento de software efetivamente aplicadas pelo grupo durante a 2ª etapa do projeto, cada uma acompanhada do arquivo ou trecho onde pode ser conferida. Ao final, registramos os pontos de melhoria encontrados na revisão e a conclusão do grupo.</p>
+<p>As tarefas da 2ª etapa foram divididas assim entre o grupo:</p>
+<table>
+  <thead><tr><th>Ordem</th><th>Período</th><th>Tarefa</th><th>Responsável</th><th>Dependência</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>04/11 a 07/11</td><td>Estrutura inicial do front-end (<code>index.html</code> e <code>style.css</code>)</td><td>Felipe</td><td>Início do projeto</td></tr>
+    <tr><td>2</td><td>08/11 a 14/11</td><td>Lógica principal JS (cadastro, lista, LocalStorage)</td><td>Vanderson</td><td>Estrutura HTML/CSS</td></tr>
+    <tr><td>2</td><td>08/11 a 14/11</td><td>Lógica complementar JS (edição, exclusão, pesquisa e validação)</td><td>Nicolas</td><td>Lógica principal e HTML</td></tr>
+    <tr><td>3</td><td>15/11 a 18/11</td><td>Tabela de testes funcionais, prints e/ou vídeo</td><td>Isaac</td><td>Lógica JS e front-end finalizados</td></tr>
+    <tr><td>4</td><td>19/11 a 21/11</td><td>Documento PDF com as boas práticas aplicadas e a conclusão do projeto</td><td>Rubia</td><td>Código e testes finalizados</td></tr>
+    <tr><td>5</td><td>22/11 a 23/11</td><td>Apresentação final e consolidação do PDF</td><td>Felipe</td><td>Documento finalizado</td></tr>
+    <tr><td>5</td><td>23/11</td><td>Envio oficial do PDF no AVA (até 23h59)</td><td>Felipe e todo o grupo</td><td>Aprovação final do PDF pelo grupo</td></tr>
+    <tr><td>Geral</td><td>Até 23/11</td><td>Registro contínuo das atividades da 2ª etapa no blog do grupo</td><td>Rubia</td><td>Acompanhamento das tarefas</td></tr>
+  </tbody>
+</table>
+
+<h2>2. Organização do trabalho e versionamento</h2>
+<h3>2.1 Controle de versão com Git e GitHub</h3>
+<p>Todo o código está no repositório <code>Senac-09/medagenda</code>, o que garante histórico das alterações, autoria de cada mudança e possibilidade de voltar a uma versão anterior. O histórico mostra a evolução do trabalho: estrutura do front-end (08/11), lógica de cadastro e persistência (12/11), edição, exclusão, pesquisa, validação e agendamento (12/11 a 14/11) e documentação dos testes (16/11).</p>
+<h3>2.2 Uma branch por tarefa e Pull Requests</h3>
+<p>O grupo combinou trabalhar em uma branch por tarefa e integrar à <code>main</code> por Pull Request. Isso foi seguido nas duas entregas de JavaScript:</p>
+<ul>
+  <li><code>feature/cadastro-medicos</code> → PR #1 (Vanderson), <strong>revisado e aprovado</strong> por Nicolas antes do merge;</li>
+  <li><code>feat/edicao-exclusao-pesquisa-validacao</code> → PR #2 (Nicolas).</li>
+</ul>
+<p>Trabalhar em branches separadas permitiu que Vanderson e Nicolas desenvolvessem em paralelo, no mesmo período, sem sobrescrever o trabalho um do outro.</p>
+<h3>2.3 Padronização do ambiente</h3>
+<ul>
+  <li><strong><code>.editorconfig</code></strong>: força UTF-8, fim de linha LF, indentação de 2 espaços, remoção de espaços sobrando e linha final em todos os editores do grupo. Assim, os diffs mostram só mudanças reais, e não diferenças de formatação entre computadores.</li>
+  <li><strong><code>.gitignore</code></strong>: impede que arquivos do sistema (<code>.DS_Store</code>, <code>Thumbs.db</code>), configurações pessoais de editor (<code>.vscode/</code>, <code>.idea/</code>) e dependências (<code>node_modules/</code>) entrem no repositório.</li>
+</ul>
+<h3>2.4 Divisão de responsabilidades e contrato entre as partes</h3>
+<p>Antes de qualquer linha de JavaScript, a tarefa de estrutura do front-end publicou no README um <strong>“Mapa de IDs”</strong> (quais elementos existem no HTML e para que servem), as <strong>classes de estado</strong> que o JS liga e desliga e um <strong>modelo de dados sugerido</strong> para o LocalStorage. Esse contrato permitiu que as tarefas seguintes avançassem sem depender de conversas a cada passo, e o README pede explicitamente: “Não renomeie sem avisar o grupo”.</p>
+
+<h2>3. Padrões de código e convenções</h2>
+<p>O grupo definiu convenções no README e elas aparecem de forma consistente no código:</p>
+<ul>
+  <li><strong>Nomes em português e significativos</strong>: <code>carregarMedicos</code>, <code>horarioOcupado</code>, <code>renderizarHorarios</code>, <code>validarConsulta</code>. O nome já diz o que a função faz, o que dispensa boa parte dos comentários.</li>
+  <li><strong>kebab-case</strong> para IDs e classes no HTML (<code>form-medico</code>, <code>grade-horarios</code>).</li>
+  <li><strong>BEM</strong> (bloco__elemento--variação) no CSS: <code>form__campo</code>, <code>btn--primario</code>, <code>horario--ocupado</code>.</li>
+  <li><strong>camelCase</strong> para variáveis e funções no JavaScript; <strong>MAIÚSCULAS</strong> para constantes de configuração (<code>CHAVE_MEDICOS</code>, <code>CHAVE_CONSULTAS</code>).</li>
+  <li><strong>Prefixo <code>is-</code></strong> para classes de estado (<code>is-hidden</code>, <code>is-invalido</code>, <code>is-editando</code>), separando visualmente o que é estilo fixo do que muda em tempo de execução.</li>
+  <li><strong>Comentários de seção</strong> no <code>app.js</code> e no <code>style.css</code>, com o nome do responsável por cada bloco, facilitando a leitura e a manutenção.</li>
+</ul>
+
+<h2>4. Boas práticas no HTML</h2>
+<h3>4.1 Separação de responsabilidades</h3>
+<p>Não há <code>style=""</code> nem <code>onclick=""</code> no <code>index.html</code>: estrutura fica no HTML, aparência no <code>style.css</code> e comportamento no <code>app.js</code>. Cada camada pode ser alterada sem quebrar as outras.</p>
+<h3>4.2 HTML semântico</h3>
+<p>A página usa <code>header</code>, <code>nav</code>, <code>main</code>, <code>section</code> e <code>footer</code>, e as tabelas têm <code>caption</code> e cabeçalhos com <code>scope="col"</code>. Isso dá significado à estrutura para navegadores, buscadores e tecnologias assistivas.</p>
+<h3>4.3 Acessibilidade</h3>
+<ul>
+  <li>Link “Pular para o conteúdo” para quem navega por teclado ou leitor de tela;</li>
+  <li>todo campo de formulário tem <code>&lt;label for&gt;</code> associado;</li>
+  <li>área de mensagens com <code>role="status"</code> e <code>aria-live="polite"</code>, para que o leitor de tela anuncie sucesso e erro;</li>
+  <li>campos com erro recebem <code>aria-invalid="true"</code> e os botões de horário usam <code>aria-pressed</code> para indicar a seleção;</li>
+  <li><code>lang="pt-BR"</code>, foco visível no CSS e respeito a <code>prefers-reduced-motion</code>.</li>
+</ul>
+<h3>4.4 Templates</h3>
+<p>As linhas das tabelas e os botões de horário são definidos em elementos <code>&lt;template&gt;</code> no HTML. O JavaScript apenas clona o modelo e preenche os campos marcados com <code>data-campo</code>, sem montar HTML em strings.</p>
+
+<h2>5. Boas práticas no CSS</h2>
+<ul>
+  <li><strong>Variáveis CSS (custom properties)</strong>: cores, fonte, espaçamentos, raio de borda e sombra ficam em <code>:root</code>. Trocar a cor principal do sistema exige alterar uma única linha.</li>
+  <li><strong>Arquivo organizado em seções numeradas</strong>: 1. Variáveis, 2. Base, 3. Layout, 4. Componentes, 5. Estados controlados pelo JavaScript, 6. Responsivo.</li>
+  <li><strong>Mobile-first e responsividade</strong>: em telas pequenas, cada linha de tabela vira um cartão, usando o atributo <code>data-rotulo</code> para exibir o nome da coluna; pontos de quebra para tablet e computador ampliam o layout.</li>
+  <li><strong>Contraste e estados claros</strong>: cores distintas para sucesso, erro e inativo, e classes específicas para horário ocupado e selecionado.</li>
+</ul>
+
+<h2>6. Boas práticas no JavaScript</h2>
+<h3>6.1 Modo estrito e declarações seguras</h3>
+<p>O arquivo começa com <code>"use strict"</code>, que transforma erros silenciosos em erros visíveis. O código usa <code>const</code> por padrão e <code>let</code> apenas quando a variável precisa mudar (por exemplo, as listas <code>medicos</code> e <code>consultas</code>); não há <code>var</code>.</p>
+<h3>6.2 Funções pequenas com responsabilidade única</h3>
+<p>Cada função faz uma coisa: <code>carregarMedicos</code> lê, <code>salvarMedicos</code> grava, <code>validarMedico</code> valida, <code>filtrarMedicos</code> filtra e <code>renderizarMedicos</code> desenha a tabela. Funções utilitárias como <code>horarioParaMinutos</code>, <code>minutosParaHorario</code> e <code>formatarDataConsulta</code> isolam conversões e podem ser reaproveitadas.</p>
+<h3>6.3 Persistência com tratamento de erros</h3>
+<p>Leitura e gravação no <code>localStorage</code> ficam dentro de <code>try/catch</code>. Se os dados estiverem corrompidos, a aplicação recomeça com uma lista vazia em vez de travar; se a gravação falhar, o usuário recebe uma mensagem de erro e o estado em memória não é alterado. O código também confere com <code>Array.isArray</code> se o conteúdo lido é realmente uma lista.</p>
+<h3>6.4 Atualização sem efeitos colaterais</h3>
+<p>Inclusões, edições e exclusões criam uma nova lista (<code>[...medicos, novoMedico]</code>, <code>map</code>, <code>filter</code>), salvam essa lista e só então substituem a lista em memória. Assim, a tela e o armazenamento nunca ficam em estados diferentes quando ocorre uma falha.</p>
+<h3>6.5 Validação em duas camadas</h3>
+<p>O HTML declara <code>required</code> e <code>maxlength</code>, mas os formulários usam <code>novalidate</code> e a validação real é feita no JavaScript, com mensagens claras em português ao lado de cada campo:</p>
+<ul>
+  <li>nome com pelo menos 3 caracteres; CRM no formato <code>123456/SP</code> (expressão regular) e sem duplicidade;</li>
+  <li>telefone com 10 ou 11 dígitos; e-mail em formato válido, quando informado;</li>
+  <li>ao menos um dia de atendimento e horário final depois do inicial;</li>
+  <li>na consulta: médico ativo, data não passada, médico que atende naquele dia e horário ainda livre.</li>
+</ul>
+<p>O erro de um campo some assim que o usuário volta a digitar nele, o que melhora a experiência de uso.</p>
+<h3>6.6 Segurança contra injeção de código</h3>
+<p>Os dados digitados pelo usuário são exibidos sempre com <code>textContent</code> (nunca <code>innerHTML</code>). Mesmo que alguém digite uma tag HTML no nome do paciente, ela aparece como texto e não é executada. Essa é a principal defesa contra ataques de XSS em aplicações que mostram dados informados pelo usuário.</p>
+<h3>6.7 Delegação de eventos</h3>
+<p>Em vez de registrar um evento em cada botão “Editar” e “Excluir”, há um único <code>addEventListener</code> no <code>&lt;tbody&gt;</code> de cada tabela e na grade de horários. O código identifica o botão clicado com <code>closest()</code> e o registro pelo <code>data-id</code> da linha. Isso funciona mesmo para linhas criadas depois e evita acumular eventos a cada redesenho.</p>
+<h3>6.8 Identificadores únicos e integridade dos dados</h3>
+<ul>
+  <li>Médicos e consultas recebem identificadores gerados com <code>crypto.randomUUID()</code>, sem risco de repetição;</li>
+  <li>ao excluir um médico, as consultas vinculadas a ele também são removidas, evitando consultas “órfãs”;</li>
+  <li>médicos inativos não aparecem para agendamento, e o horário em edição é ignorado na checagem de conflito, para não bloquear a própria consulta.</li>
+</ul>
+<h3>6.9 Cuidado com datas e fuso horário</h3>
+<p>O README alertou que <code>new Date("2026-11-12")</code> é interpretado em UTC e pode cair no dia anterior no Brasil. O código seguiu o alerta: usa <code>new Date(`${data}T00:00:00`)</code> (horário local) para descobrir o dia da semana e monta a data de hoje com os componentes locais para impedir agendamentos no passado.</p>
+<h3>6.10 Confirmação de ações destrutivas e retorno ao usuário</h3>
+<p>Excluir médico e cancelar consulta pedem confirmação. Toda operação termina com uma mensagem de sucesso ou de erro, e o formulário volta ao modo “cadastro” depois de salvar ou cancelar uma edição.</p>
+
+<h2>7. Documentação e testes</h2>
+<h3>7.1 README como documentação viva</h3>
+<p>O <code>README.md</code> explica como rodar o projeto (basta abrir o <code>index.html</code>), a estrutura de pastas, onde cada requisito aparece na tela, o cronograma, o mapa de IDs, as classes de estado, o modelo de dados e as convenções do grupo. Qualquer pessoa nova consegue entender e contribuir lendo um único arquivo.</p>
+<h3>7.2 Testes funcionais</h3>
+<p>Na tarefa de testes, foi criada a pasta <code>testes/</code> com uma matriz de <strong>28 casos de teste</strong> cobrindo os cinco requisitos (11 para RF01, 4 para RF02, 3 para RF03, 9 para RF04 e 1 para RF05), incluindo cenários de erro como CRM duplicado, data passada e horário ocupado. Cada caso tem procedimento, resultado esperado, campo para o resultado obtido e evidência. Como evidências, há a gravação em vídeo da execução (<code>testes/evidencias/testes-funcionais-isaac.mp4</code>) e capturas de tela dos casos TF01 (cadastro de médico), TF14 (filtro por especialidade), TF16 (grade de horários), TF19 (consulta agendada) e TF23 (validação do telefone do paciente), na mesma pasta.</p>
+<p>Segundo o responsável pela execução, <strong>os 28 casos foram executados e aprovados, sem falhas encontradas</strong>:</p>
+<table>
+  <thead><tr><th>Requisito</th><th>Funcionalidade</th><th>Casos</th><th>Aprovados</th></tr></thead>
+  <tbody>
+    <tr><td>RF01</td><td>Cadastro, edição, exclusão e validação de médicos</td><td>11</td><td>11</td></tr>
+    <tr><td>RF02</td><td>Pesquisa e filtros de médicos</td><td>4</td><td>4</td></tr>
+    <tr><td>RF03</td><td>Agenda e horários disponíveis</td><td>3</td><td>3</td></tr>
+    <tr><td>RF04</td><td>Agendamento, edição e cancelamento de consultas</td><td>9</td><td>9</td></tr>
+    <tr><td>RF05</td><td>Persistência com LocalStorage</td><td>1</td><td>1</td></tr>
+    <tr><td><strong>Total</strong></td><td></td><td><strong>28</strong></td><td><strong>28</strong></td></tr>
+  </tbody>
+</table>
+<p>Os três pontos de atenção levantados na leitura do código também foram verificados e aprovados: a edição de uma consulta mantém o horário original sem exigir nova seleção; a exclusão de um médico remove as consultas vinculadas a ele; e o sistema bloqueia agendamentos em data passada ou em horário já reservado.</p>
+<p>Uma boa prática importante da documentação de testes é a <strong>transparência sobre a origem dos resultados</strong>: o relatório separa o que foi relatado pelo responsável, o que aparece nas evidências visuais e o que foi identificado na leitura do código, sem apresentar suposições como fatos comprovados.</p>
+
+
+<h2>8. Quadro-resumo: prática × evidência no projeto</h2>
+<table>
+  <thead><tr><th style="width:34%">Boa prática</th><th style="width:40%">Onde conferir</th><th>Benefício</th></tr></thead>
+  <tbody>
+    <tr><td>Versionamento com Git/GitHub</td><td>Histórico do repositório</td><td>Rastreabilidade e segurança</td></tr>
+    <tr><td>Branch por tarefa + Pull Request</td><td>PR #1 e PR #2</td><td>Trabalho em paralelo</td></tr>
+    <tr><td>Revisão de código</td><td>PR #1 aprovado por outro integrante</td><td>Menos erros na <code>main</code></td></tr>
+    <tr><td>Padronização do editor</td><td><code>.editorconfig</code></td><td>Formatação uniforme</td></tr>
+    <tr><td>Arquivos ignorados</td><td><code>.gitignore</code></td><td>Repositório limpo</td></tr>
+    <tr><td>Convenções de nomes (kebab, BEM, camelCase)</td><td>README, <code>index.html</code>, <code>style.css</code>, <code>app.js</code></td><td>Código legível</td></tr>
+    <tr><td>Separação HTML/CSS/JS</td><td>Sem <code>style</code>/<code>onclick</code> no HTML</td><td>Manutenção isolada</td></tr>
+    <tr><td>HTML semântico e acessível</td><td><code>index.html</code> (labels, aria, caption, scope)</td><td>Inclusão e usabilidade</td></tr>
+    <tr><td>Variáveis CSS e mobile-first</td><td><code>style.css</code>, seções 1 e 6</td><td>Consistência e responsividade</td></tr>
+    <tr><td><code>"use strict"</code>, <code>const</code>/<code>let</code></td><td><code>app.js</code>, início do arquivo</td><td>Erros detectados cedo</td></tr>
+    <tr><td>Funções de responsabilidade única</td><td><code>carregar*</code>, <code>salvar*</code>, <code>validar*</code>, <code>renderizar*</code></td><td>Reuso e clareza</td></tr>
+    <tr><td><code>try/catch</code> na persistência</td><td><code>carregarMedicos</code>, <code>salvarConsultas</code> etc.</td><td>Aplicação não trava</td></tr>
+    <tr><td>Validação com mensagens por campo</td><td><code>validarMedico</code>, <code>validarConsulta</code></td><td>Dados corretos</td></tr>
+    <tr><td>Saída com <code>textContent</code></td><td><code>preencherCampo</code>, <code>renderizarConsultas</code></td><td>Proteção contra XSS</td></tr>
+    <tr><td>Delegação de eventos</td><td>Listeners nos <code>&lt;tbody&gt;</code> e na grade</td><td>Desempenho e simplicidade</td></tr>
+    <tr><td>IDs únicos e integridade</td><td><code>crypto.randomUUID()</code>, <code>excluirMedico</code></td><td>Dados consistentes</td></tr>
+    <tr><td>Datas no fuso local</td><td><code>obterDiaSemana</code>, <code>validarConsulta</code></td><td>Dia da semana correto</td></tr>
+    <tr><td>Documentação</td><td><code>README.md</code></td><td>Entrada rápida no projeto</td></tr>
+    <tr><td>Testes funcionais documentados</td><td><code>testes/testes-funcionais.md</code>, vídeo e prints em <code>testes/evidencias/</code></td><td>Qualidade verificável</td></tr>
+  </tbody>
+</table>
+
+<h2>9. Pontos de melhoria identificados</h2>
+<p>Revisar o próprio trabalho também é uma boa prática. Na leitura do repositório para este documento, o grupo encontrou os pontos abaixo. Nenhum deles impedia o funcionamento da aplicação, e a maior parte já foi corrigida por Pull Request.</p>
+<table>
+  <thead><tr><th style="width:24%">Ponto</th><th style="width:38%">Situação encontrada</th><th>O que foi feito</th></tr></thead>
+  <tbody>
+    <tr><td>Acentuação nas mensagens</td><td>Parte dos textos exibidos ao usuário estava sem acento (“Medico cadastrado”), parte com (“Consulta agendada”).</td><td><strong>Corrigido.</strong> Todas as mensagens passaram a usar acentuação correta.</td></tr>
+    <tr><td>Modelo de dados × README</td><td>O código usa <code>diasAtendimento</code>, <code>horaInicio</code>, <code>horaFim</code> e <code>duracaoConsulta</code>; o README sugeria <code>dias</code>, <code>inicio</code>, <code>fim</code> e <code>duracao</code>.</td><td><strong>Corrigido.</strong> O README agora descreve os campos que o código grava de fato.</td></tr>
+    <tr><td>Logs de depuração</td><td>Havia <code>console.log</code> de desenvolvimento que exibiam a lista de médicos no console.</td><td><strong>Corrigido.</strong> Os logs foram removidos; ficaram só os <code>console.error</code> do tratamento de erros.</td></tr>
+    <tr><td>Código repetido</td><td><code>carregarMedicos</code>/<code>carregarConsultas</code> e <code>salvarMedicos</code>/<code>salvarConsultas</code> são quase iguais.</td><td><strong>Melhoria futura:</strong> criar funções genéricas <code>lerLista(chave)</code> e <code>gravarLista(chave, lista)</code>.</td></tr>
+    <tr><td>Resultados dos testes</td><td>A matriz de 28 casos ainda não tinha os resultados preenchidos.</td><td><strong>Concluído.</strong> Os 28 casos foram registrados como aprovados pelo responsável pelos testes.</td></tr>
+  </tbody>
+</table>
+
+<h2>10. Conclusão</h2>
+<p>O MedAgenda cumpriu o objetivo de oferecer, sem instalação e sem servidor, um sistema simples para cadastrar médicos credenciados, consultar sua disponibilidade e agendar consultas, com os dados preservados no navegador. Os cinco requisitos funcionais definidos na 1ª entrega estão implementados no código da branch <code>main</code>, e os 28 casos de teste funcional foram registrados como aprovados, sem falhas encontradas.</p>
+<p>Mais do que o resultado final, o projeto mostrou na prática por que as boas práticas existem. O contrato de IDs e as convenções escritas no README permitiram que cinco pessoas trabalhassem em partes diferentes sem se atrapalhar; o uso de branches e Pull Requests deixou que duas partes do JavaScript fossem desenvolvidas ao mesmo tempo; e o <code>.editorconfig</code> manteve o código com a mesma cara, independentemente de quem o escreveu. No código, escolhas como validação com mensagens claras, <code>try/catch</code> no armazenamento, <code>textContent</code> no lugar de <code>innerHTML</code> e cuidado com o fuso horário mostram preocupação com o usuário, com a segurança e com a confiabilidade dos dados.</p>
+<p>O grupo também aprendeu que a documentação precisa acompanhar o código: o modelo de dados mudou durante o desenvolvimento e o README só foi ajustado depois, na revisão feita para este documento. Essa mesma revisão corrigiu a acentuação das mensagens e removeu os logs de depuração, mostrando que revisar o próprio trabalho faz parte de entregar com qualidade.</p>
+<p>Como evolução futura, a aplicação poderia ganhar um back-end com banco de dados para permitir o acesso de vários usuários e dispositivos, autenticação, envio de lembretes aos pacientes e testes automatizados das funções de validação e de cálculo de horários.</p>
+
+</body>
+</html>

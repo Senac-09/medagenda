@@ -19,6 +19,10 @@ medagenda/
 ├── index.html      → estrutura das telas
 ├── css/style.css   → visual e responsividade
 ├── js/app.js       → lógica (Fase 2)
+├── testes/         → matriz de testes funcionais, relatório e evidências (Fase 3)
+├── docs/           → documento de boas práticas e conclusão da 2ª etapa (Fase 4)
+│   ├── MedAgenda-2a-Etapa-Boas-Praticas.pdf → versão para leitura e entrega
+│   └── boas-praticas.html                   → fonte editável do PDF
 ├── README.md
 ├── .editorconfig   → padroniza indentação e codificação no editor
 └── .gitignore
