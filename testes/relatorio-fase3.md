@@ -117,7 +117,7 @@ A lógica de agendamento evita conflitos simples de horário e procura preservar
 
 ## 9. Evidências anexas e limites da revisão
 
-As imagens usadas nesta atualização estão na pasta [`evidencias/`](evidencias/), com nomes associados aos cenários. O vídeo completo está referenciado em [VIDEO.md](VIDEO.md) e disponível no repositório do projeto, mas não foi redistribuído neste pacote.
+As imagens da execução estão na pasta [`evidencias/`](evidencias/), com nomes associados aos cenários. O vídeo completo está na mesma pasta e também está referenciado em [VIDEO.md](VIDEO.md).
 
 O relatório diferencia **resultado relatado da execução**, **comportamento observado nas imagens** e **funcionalidade identificada no código**. A documentação permite descrever o sistema e registrar as aprovações informadas, sem apresentar inferências como se fossem filmagens analisadas.
 

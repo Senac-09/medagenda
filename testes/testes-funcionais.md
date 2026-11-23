@@ -72,7 +72,7 @@ A análise do repositório `Senac-09/medagenda`, branch `main`, complementa o re
 
 - **Demonstrado parcialmente por prints:** TF01, TF14, TF16 e TF19; TF23 contém um print de mensagem de validação de telefone, embora não reproduza toda a sequência do cenário da matriz.
 - **Demais casos:** status *Aprovado* informado pelo responsável, sem fotografia individual suficiente para validação independente.
-- **Vídeo:** disponível no repositório em [`evidencias/testes-funcionais-isaac.mp4`](evidencias/testes-funcionais-isaac.mp4), mas não incluído no ZIP e não inspecionado quadro a quadro nesta revisão.
+- **Vídeo:** disponível no repositório em [`evidencias/testes-funcionais-isaac.mp4`](evidencias/testes-funcionais-isaac.mp4); a gravação não foi inspecionada quadro a quadro nesta revisão documental.
 
 **Importante:** mensagens de validação de dados incorretos (CRM inválido, telefone inválido, data anterior etc.) são o **resultado esperado** de testes negativos; elas não representam falhas do sistema. “Nenhuma falha relatada” refere-se à execução dos requisitos, não à ausência dessas mensagens.
 

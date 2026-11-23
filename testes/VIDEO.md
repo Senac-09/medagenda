@@ -10,9 +10,9 @@
 
 **Caminho no projeto:** `testes/evidencias/testes-funcionais-isaac.mp4`
 
-A gravação já consta na pasta `testes/evidencias/` do GitHub. Ela **não está incluída no pacote ZIP** de atualização da documentação.
+A gravação está disponível na pasta `testes/evidencias/` do repositório e integra as evidências da Fase 3.
 
-## Capturas anexadas a esta entrega
+## Capturas de tela das evidências
 
 As imagens em [`evidencias/`](evidencias/) documentam parte dos fluxos de cadastro de médico, filtro de especialidade, grade de horários e agendamento; uma imagem adicional apresenta uma mensagem de validação do telefone do paciente.
 

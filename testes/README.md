@@ -4,7 +4,7 @@
 **Projeto:** Projeto Integrador — Senac EAD, Boas Práticas de Desenvolvimento de Software  
 **Período previsto:** 15 a 18/11/2026
 
-## Conteúdo deste pacote
+## Arquivos da etapa de testes
 
 - [`testes-funcionais.md`](testes-funcionais.md): matriz de 28 casos, com resultados informados e detalhes das rotinas existentes no GitHub.
 - [`relatorio-fase3.md`](relatorio-fase3.md): relatório ampliado, incluindo descrição por requisito funcional, resultados, análise técnica, pontos de atenção e conclusão.
@@ -28,9 +28,9 @@ As imagens recebidas demonstram partes dos cenários TF01, TF14, TF16 e TF19; ex
 
 **Fonte:** [`Senac-09/medagenda`](https://github.com/Senac-09/medagenda), com revisão de `README.md`, `index.html` e `js/app.js` da branch `main` em 19/11/2026.
 
-## Uso no repositório
+## Organização no repositório
 
-Coloque estes arquivos na pasta `testes/` do projeto, mantendo as capturas em `testes/evidencias/`. O vídeo `testes-funcionais-isaac.mp4` já existe na mesma pasta do GitHub e **não precisa ser enviado novamente**. O ZIP não contém o vídeo.
+A matriz, o relatório e a documentação do vídeo ficam na pasta `testes/`. As oito capturas de tela e a gravação `testes-funcionais-isaac.mp4` ficam em `testes/evidencias/`.
 
 ## Nota sobre os status
 
