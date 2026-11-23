@@ -2,13 +2,13 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>MedAgenda – 2ª etapa – Boas práticas aplicadas e conclusão</title>
+<title>MedAgenda – 2ª etapa – Boas práticas, evidências, testes e conclusão</title>
 <style>
   @page {
     size: A4;
     margin: 2.5cm 2cm 2.2cm 2.5cm;
     @bottom-right { content: counter(page); font: 9pt Arial, sans-serif; color: #586a69; }
-    @bottom-left { content: "MedAgenda · 2ª etapa – Boas práticas e conclusão"; font: 9pt Arial, sans-serif; color: #586a69; }
+    @bottom-left { content: "MedAgenda · 2ª etapa – Projeto Integrador"; font: 9pt Arial, sans-serif; color: #586a69; }
   }
   @page :first { @bottom-right { content: none; } @bottom-left { content: none; } }
   body { font: 11pt/1.5 Arial, Helvetica, sans-serif; color: #1b2a29; }
@@ -37,6 +37,13 @@
   .nota--alerta { border-color: #b42318; background: #fdece9; }
   .sumario li { list-style: none; margin-bottom: 2pt; }
   .sumario { padding-left: 0; }
+
+  figure.print { margin: 8pt 0 14pt; page-break-inside: avoid; }
+  figure.print img { width: 100%; border: 0.75pt solid #c3d3d2; }
+  figure.print figcaption { font-size: 9pt; color: #586a69; margin-top: 3pt; }
+  table.testes { font-size: 8.5pt; }
+  table.testes td, table.testes th { padding: 3pt 4pt; }
+  .status-ok { color: #0b6e69; font-weight: bold; }
 </style>
 </head>
 <body>
@@ -45,7 +52,7 @@
   <div class="capa__topo">Senac EAD<br>Projeto Integrador – Boas Práticas de Desenvolvimento de Software</div>
   <div class="capa__meio">
     <h1>MedAgenda</h1>
-    <div class="sub">2ª etapa – Boas práticas aplicadas e conclusão</div>
+    <div class="sub">2ª etapa – Desenvolvimento da aplicação web<br>Boas práticas, evidências, testes e conclusão</div>
   </div>
   <div class="capa__grupo">
     <strong>Grupo:</strong><br>
@@ -68,14 +75,16 @@
   <li>5. Boas práticas no CSS</li>
   <li>6. Boas práticas no JavaScript</li>
   <li>7. Documentação e testes</li>
-  <li>8. Quadro-resumo: prática × evidência no projeto</li>
-  <li>9. Pontos de melhoria identificados</li>
-  <li>10. Conclusão</li>
+  <li>8. Evidências do funcionamento (prints das telas)</li>
+  <li>9. Tabela de testes realizados</li>
+  <li>10. Quadro-resumo: prática × evidência no projeto</li>
+  <li>11. Pontos de melhoria identificados</li>
+  <li>12. Conclusão</li>
 </ul>
 
 <h2>1. Introdução</h2>
 <p>O MedAgenda é uma aplicação web para cadastrar médicos credenciados e agendar consultas em pequenas clínicas e cooperativas médicas. Foi construída com HTML5, CSS3 e JavaScript puro, e os dados ficam salvos no próprio navegador por meio do <code>localStorage</code>. A aplicação atende a cinco requisitos funcionais: gerenciar médicos (RF01), pesquisar médicos por nome, CRM, especialidade e situação (RF02), visualizar a agenda de horários (RF03), realizar agendamentos (RF04) e armazenar os dados no navegador (RF05).</p>
-<p>Este documento reúne as boas práticas de desenvolvimento de software efetivamente aplicadas pelo grupo durante a 2ª etapa do projeto, cada uma acompanhada do arquivo ou trecho onde pode ser conferida. Ao final, registramos os pontos de melhoria encontrados na revisão e a conclusão do grupo.</p>
+<p>Este documento reúne as boas práticas de desenvolvimento de software efetivamente aplicadas pelo grupo durante a 2ª etapa do projeto, cada uma acompanhada do arquivo ou trecho onde pode ser conferida. Também apresenta os prints das principais telas da aplicação em funcionamento, a tabela completa dos testes realizados e, ao final, os pontos de melhoria encontrados na revisão e a conclusão do grupo.</p>
 <p>As tarefas da 2ª etapa foram divididas assim entre o grupo:</p>
 <table>
   <thead><tr><th>Ordem</th><th>Período</th><th>Tarefa</th><th>Responsável</th><th>Dependência</th></tr></thead>
@@ -181,7 +190,7 @@
 <h3>7.1 README como documentação viva</h3>
 <p>O <code>README.md</code> explica como rodar o projeto (basta abrir o <code>index.html</code>), a estrutura de pastas, onde cada requisito aparece na tela, o cronograma, o mapa de IDs, as classes de estado, o modelo de dados e as convenções do grupo. Qualquer pessoa nova consegue entender e contribuir lendo um único arquivo.</p>
 <h3>7.2 Testes funcionais</h3>
-<p>Na tarefa de testes, foi criada a pasta <code>testes/</code> com uma matriz de <strong>28 casos de teste</strong> cobrindo os cinco requisitos (11 para RF01, 4 para RF02, 3 para RF03, 9 para RF04 e 1 para RF05), incluindo cenários de erro como CRM duplicado, data passada e horário ocupado. Cada caso tem procedimento, resultado esperado, campo para o resultado obtido e evidência. Como evidências, há a gravação em vídeo da execução (<code>testes/evidencias/testes-funcionais-isaac.mp4</code>) e capturas de tela dos casos TF01 (cadastro de médico), TF14 (filtro por especialidade), TF16 (grade de horários), TF19 (consulta agendada) e TF23 (validação do telefone do paciente), na mesma pasta.</p>
+<p>Na tarefa de testes, foi criada a pasta <code>testes/</code> com uma matriz de <strong>28 casos de teste</strong> cobrindo os cinco requisitos (11 para RF01, 4 para RF02, 3 para RF03, 9 para RF04 e 1 para RF05), incluindo cenários de erro como CRM duplicado, data passada e horário ocupado. Cada caso tem procedimento, resultado esperado, campo para o resultado obtido e evidência. Como evidências, há a gravação em vídeo da execução (<code>testes/evidencias/testes-funcionais-isaac.mp4</code>) e capturas de tela dos casos TF01 (cadastro de médico), TF14 (filtro por especialidade), TF16 (grade de horários), TF19 (consulta agendada) e TF23 (validação do telefone do paciente), na mesma pasta. Os prints estão reproduzidos na seção 8, e a tabela completa dos testes, na seção 9.</p>
 <p>Segundo o responsável pela execução, <strong>os 28 casos foram executados e aprovados, sem falhas encontradas</strong>:</p>
 <table>
   <thead><tr><th>Requisito</th><th>Funcionalidade</th><th>Casos</th><th>Aprovados</th></tr></thead>
@@ -198,7 +207,63 @@
 <p>Uma boa prática importante da documentação de testes é a <strong>transparência sobre a origem dos resultados</strong>: o relatório separa o que foi relatado pelo responsável, o que aparece nas evidências visuais e o que foi identificado na leitura do código, sem apresentar suposições como fatos comprovados.</p>
 
 
-<h2>8. Quadro-resumo: prática × evidência no projeto</h2>
+<h2>8. Evidências do funcionamento (prints das telas)</h2>
+<p>As imagens a seguir foram capturadas durante a execução dos testes funcionais e mostram as principais telas da aplicação em funcionamento: cadastro e listagem de médicos, pesquisa com filtros, agenda de horários e agendamento de consultas. Todos os dados usados são fictícios. A gravação em vídeo da execução está no repositório, em <code>testes/evidencias/testes-funcionais-isaac.mp4</code>.</p>
+<figure class="print"><img src="../testes/evidencias/TF01-formulario-medico.png" alt="Tela de cadastro de médico (RF01) com todos os campos preenchidos: nome, CRM, especialidade, telefone, e-mail, dias e horário de atendimento, duração da consulta e situação.">
+  <figcaption><strong>Figura 1</strong> – Tela de cadastro de médico (RF01) com todos os campos preenchidos: nome, CRM, especialidade, telefone, e-mail, dias e horário de atendimento, duração da consulta e situação. <em>(arquivo TF01-formulario-medico.png)</em></figcaption></figure>
+<figure class="print"><img src="../testes/evidencias/TF01-medico-cadastrado.png" alt="Listagem de médicos cadastrados (RF01/RF02) após salvar: o médico aparece na tabela com CRM, especialidade, dias e faixa de atendimento, situação e os botões Editar e Excluir.">
+  <figcaption><strong>Figura 2</strong> – Listagem de médicos cadastrados (RF01/RF02) após salvar: o médico aparece na tabela com CRM, especialidade, dias e faixa de atendimento, situação e os botões Editar e Excluir. <em>(arquivo TF01-medico-cadastrado.png)</em></figcaption></figure>
+<figure class="print"><img src="../testes/evidencias/TF14-filtro-clinica-geral.png" alt="Pesquisa com filtro por especialidade (RF02): com “Clínica Geral” selecionado, o médico de Cardiologia não aparece e o sistema informa “Nenhum médico encontrado”.">
+  <figcaption><strong>Figura 3</strong> – Pesquisa com filtro por especialidade (RF02): com “Clínica Geral” selecionado, o médico de Cardiologia não aparece e o sistema informa “Nenhum médico encontrado”. <em>(arquivo TF14-filtro-clinica-geral.png)</em></figcaption></figure>
+<figure class="print"><img src="../testes/evidencias/TF14-filtro-cardiologia.png" alt="Filtro “Cardiologia” (RF02) exibindo o médico correspondente e, abaixo, a tela de agendamento com a escolha do médico.">
+  <figcaption><strong>Figura 4</strong> – Filtro “Cardiologia” (RF02) exibindo o médico correspondente e, abaixo, a tela de agendamento com a escolha do médico. <em>(arquivo TF14-filtro-cardiologia.png)</em></figcaption></figure>
+<figure class="print"><img src="../testes/evidencias/TF16-selecao-medico.png" alt="Agendamento de consulta (RF03): seleção do médico; apenas médicos ativos aparecem como opção.">
+  <figcaption><strong>Figura 5</strong> – Agendamento de consulta (RF03): seleção do médico; apenas médicos ativos aparecem como opção. <em>(arquivo TF16-selecao-medico.png)</em></figcaption></figure>
+<figure class="print"><img src="../testes/evidencias/TF16-grade-horarios.png" alt="Grade de horários disponíveis (RF03) para 09/12/2026, gerada a partir do expediente (08:00–12:00) e da duração de 30 minutos cadastrados para o médico.">
+  <figcaption><strong>Figura 6</strong> – Grade de horários disponíveis (RF03) para 09/12/2026, gerada a partir do expediente (08:00–12:00) e da duração de 30 minutos cadastrados para o médico. <em>(arquivo TF16-grade-horarios.png)</em></figcaption></figure>
+<figure class="print"><img src="../testes/evidencias/TF23-telefone-paciente.png" alt="Validação do formulário de consulta (RF04): horário 10:00 selecionado e mensagem de erro junto ao campo de telefone do paciente.">
+  <figcaption><strong>Figura 7</strong> – Validação do formulário de consulta (RF04): horário 10:00 selecionado e mensagem de erro junto ao campo de telefone do paciente. <em>(arquivo TF23-telefone-paciente.png)</em></figcaption></figure>
+<figure class="print"><img src="../testes/evidencias/TF19-consulta-agendada.png" alt="Consultas agendadas (RF04/RF05): a consulta de Ana Paula em 09/12/2026 às 10:00 aparece na tabela, com médico, especialidade e os botões Editar e Cancelar.">
+  <figcaption><strong>Figura 8</strong> – Consultas agendadas (RF04/RF05): a consulta de Ana Paula em 09/12/2026 às 10:00 aparece na tabela, com médico, especialidade e os botões Editar e Cancelar. <em>(arquivo TF19-consulta-agendada.png)</em></figcaption></figure>
+
+<h2 style="page-break-before: always">9. Tabela de testes realizados</h2>
+<p>A tabela abaixo traz os 28 casos de teste funcional executados na aplicação, com o procedimento, o resultado esperado e o status. Nos testes de erro (CRM inválido, data passada, horário ocupado etc.), a mensagem de validação exibida pelo sistema é o <strong>resultado esperado</strong>, e não uma falha. A coluna “Evidência” indica a figura da seção 8 relacionada ao caso; os demais casos estão registrados no vídeo de execução. A versão completa, com o resultado obtido em cada caso, está em <code>testes/testes-funcionais.md</code>.</p>
+<table class="testes">
+  <thead><tr><th style="width:6%">ID</th><th style="width:6%">Req.</th><th style="width:17%">Cenário</th><th style="width:30%">Procedimento</th><th style="width:22%">Resultado esperado</th><th style="width:9%">Status</th><th>Evidência</th></tr></thead>
+  <tbody>
+<tr><td>TF01</td><td>RF01</td><td>Cadastrar médico válido</td><td>Preencher nome, CRM 123456/SP, especialidade, telefone com DDD, dia, início 08:00, fim 12:00; salvar</td><td>Médico aparece na lista e mensagem de sucesso</td><td class="status-ok">Aprovado</td><td>Fig. 1, Fig. 2</td></tr>
+<tr><td>TF02</td><td>RF01</td><td>Nome obrigatório</td><td>Deixar nome vazio e preencher os demais campos válidos; salvar</td><td>Exibir erro de nome; não cadastrar</td><td class="status-ok">Aprovado</td><td>—</td></tr>
+<tr><td>TF03</td><td>RF01</td><td>CRM inválido</td><td>Informar CRM 123/SP e demais campos válidos; salvar</td><td>Exibir erro de formato do CRM</td><td class="status-ok">Aprovado</td><td>—</td></tr>
+<tr><td>TF04</td><td>RF01</td><td>CRM duplicado</td><td>Cadastrar médico; tentar cadastrar outro com mesmo CRM</td><td>Impedir duplicidade e exibir erro</td><td class="status-ok">Aprovado</td><td>—</td></tr>
+<tr><td>TF05</td><td>RF01</td><td>Telefone inválido</td><td>Informar telefone com menos de 10 dígitos; salvar</td><td>Exibir erro de telefone</td><td class="status-ok">Aprovado</td><td>—</td></tr>
+<tr><td>TF06</td><td>RF01</td><td>E-mail inválido</td><td>Informar email sem @ e salvar</td><td>Exibir erro de e-mail</td><td class="status-ok">Aprovado</td><td>—</td></tr>
+<tr><td>TF07</td><td>RF01</td><td>Dia obrigatório</td><td>Não marcar dia de atendimento; salvar</td><td>Exibir erro de dias</td><td class="status-ok">Aprovado</td><td>—</td></tr>
+<tr><td>TF08</td><td>RF01</td><td>Faixa horária inválida</td><td>Início 12:00, fim 08:00; salvar</td><td>Exibir erro no horário final</td><td class="status-ok">Aprovado</td><td>—</td></tr>
+<tr><td>TF09</td><td>RF01</td><td>Editar médico</td><td>Cadastrar médico; clicar Editar, alterar telefone e salvar</td><td>Atualizar registro sem duplicar</td><td class="status-ok">Aprovado</td><td>—</td></tr>
+<tr><td>TF10</td><td>RF01</td><td>Excluir médico</td><td>Cadastrar médico; clicar Excluir e confirmar</td><td>Remover médico da listagem</td><td class="status-ok">Aprovado</td><td>—</td></tr>
+<tr><td>TF11</td><td>RF01</td><td>Cancelar exclusão</td><td>Clicar Excluir e cancelar confirmação</td><td>Manter médico</td><td class="status-ok">Aprovado</td><td>—</td></tr>
+<tr><td>TF12</td><td>RF02</td><td>Busca por nome</td><td>Cadastrar dois médicos; pesquisar nome de um</td><td>Mostrar apenas médico correspondente</td><td class="status-ok">Aprovado</td><td>—</td></tr>
+<tr><td>TF13</td><td>RF02</td><td>Busca por CRM</td><td>Pesquisar CRM cadastrado</td><td>Mostrar médico correspondente</td><td class="status-ok">Aprovado</td><td>—</td></tr>
+<tr><td>TF14</td><td>RF02</td><td>Filtro de especialidade</td><td>Cadastrar médicos de especialidades diferentes; filtrar</td><td>Mostrar somente especialidade escolhida</td><td class="status-ok">Aprovado</td><td>Fig. 3, Fig. 4</td></tr>
+<tr><td>TF15</td><td>RF02</td><td>Filtro ativo/inativo</td><td>Cadastrar médico inativo; alternar filtro de situação</td><td>Mostrar registros conforme situação</td><td class="status-ok">Aprovado</td><td>—</td></tr>
+<tr><td>TF16</td><td>RF03</td><td>Agenda por dia</td><td>Cadastrar médico para segundas 08:00–10:00, duração 30; selecionar segunda futura</td><td>Mostrar horários 08:00, 08:30, 09:00, 09:30</td><td class="status-ok">Aprovado</td><td>Fig. 5, Fig. 6</td></tr>
+<tr><td>TF17</td><td>RF03</td><td>Dia sem atendimento</td><td>Selecionar dia não marcado no cadastro do médico</td><td>Exibir mensagem de indisponibilidade</td><td class="status-ok">Aprovado</td><td>—</td></tr>
+<tr><td>TF18</td><td>RF03</td><td>Médico inativo</td><td>Cadastrar médico inativo e abrir seleção de agendamento</td><td>Médico não aparece como opção</td><td class="status-ok">Aprovado</td><td>—</td></tr>
+<tr><td>TF19</td><td>RF04</td><td>Agendar consulta válida</td><td>Selecionar médico ativo, data futura atendida, horário livre e paciente/telefone válidos; reservar</td><td>Consulta aparece na tabela</td><td class="status-ok">Aprovado</td><td>Fig. 8</td></tr>
+<tr><td>TF20</td><td>RF04</td><td>Horário ocupado</td><td>Agendar consulta; voltar à mesma data e médico</td><td>Horário reservado fica indisponível</td><td class="status-ok">Aprovado</td><td>—</td></tr>
+<tr><td>TF21</td><td>RF04</td><td>Data passada</td><td>Selecionar data anterior à atual e tentar reservar</td><td>Exibir erro e impedir agendamento</td><td class="status-ok">Aprovado</td><td>—</td></tr>
+<tr><td>TF22</td><td>RF04</td><td>Paciente obrigatório</td><td>Deixar paciente vazio; tentar reservar</td><td>Exibir erro de paciente</td><td class="status-ok">Aprovado</td><td>—</td></tr>
+<tr><td>TF23</td><td>RF04</td><td>Telefone do paciente inválido</td><td>Informar telefone curto; tentar reservar</td><td>Exibir erro de telefone</td><td class="status-ok">Aprovado</td><td>Fig. 7</td></tr>
+<tr><td>TF24</td><td>RF04</td><td>Editar consulta</td><td>Agendar consulta; clicar Editar, alterar paciente e salvar</td><td>Atualizar consulta sem duplicar</td><td class="status-ok">Aprovado</td><td>—</td></tr>
+<tr><td>TF25</td><td>RF04</td><td>Cancelar consulta</td><td>Agendar consulta; clicar Cancelar e confirmar</td><td>Consulta removida; horário liberado</td><td class="status-ok">Aprovado</td><td>—</td></tr>
+<tr><td>TF26</td><td>RF04</td><td>Busca de consultas</td><td>Agendar duas consultas; pesquisar paciente ou médico</td><td>Filtrar corretamente</td><td class="status-ok">Aprovado</td><td>—</td></tr>
+<tr><td>TF27</td><td>RF04</td><td>Filtro de data</td><td>Agendar consultas em datas diferentes; filtrar uma data</td><td>Mostrar apenas consultas da data</td><td class="status-ok">Aprovado</td><td>—</td></tr>
+<tr><td>TF28</td><td>RF05</td><td>Persistência LocalStorage</td><td>Cadastrar médico e consulta; recarregar página</td><td>Dados permanecem disponíveis</td><td class="status-ok">Aprovado</td><td>—</td></tr>
+  </tbody>
+</table>
+<p><strong>Resultado geral:</strong> 28 casos executados, 28 aprovados, 0 reprovados, 0 bloqueados.</p>
+
+<h2>10. Quadro-resumo: prática × evidência no projeto</h2>
 <table>
   <thead><tr><th style="width:34%">Boa prática</th><th style="width:40%">Onde conferir</th><th>Benefício</th></tr></thead>
   <tbody>
@@ -224,7 +289,7 @@
   </tbody>
 </table>
 
-<h2>9. Pontos de melhoria identificados</h2>
+<h2>11. Pontos de melhoria identificados</h2>
 <p>Revisar o próprio trabalho também é uma boa prática. Na leitura do repositório para este documento, o grupo encontrou os pontos abaixo. Nenhum deles impedia o funcionamento da aplicação, e a maior parte já foi corrigida por Pull Request.</p>
 <table>
   <thead><tr><th style="width:24%">Ponto</th><th style="width:38%">Situação encontrada</th><th>O que foi feito</th></tr></thead>
@@ -237,7 +302,7 @@
   </tbody>
 </table>
 
-<h2>10. Conclusão</h2>
+<h2>12. Conclusão</h2>
 <p>O MedAgenda cumpriu o objetivo de oferecer, sem instalação e sem servidor, um sistema simples para cadastrar médicos credenciados, consultar sua disponibilidade e agendar consultas, com os dados preservados no navegador. Os cinco requisitos funcionais definidos na 1ª entrega estão implementados no código da branch <code>main</code>, e os 28 casos de teste funcional foram registrados como aprovados, sem falhas encontradas.</p>
 <p>Mais do que o resultado final, o projeto mostrou na prática por que as boas práticas existem. O contrato de IDs e as convenções escritas no README permitiram que cinco pessoas trabalhassem em partes diferentes sem se atrapalhar; o uso de branches e Pull Requests deixou que duas partes do JavaScript fossem desenvolvidas ao mesmo tempo; e o <code>.editorconfig</code> manteve o código com a mesma cara, independentemente de quem o escreveu. No código, escolhas como validação com mensagens claras, <code>try/catch</code> no armazenamento, <code>textContent</code> no lugar de <code>innerHTML</code> e cuidado com o fuso horário mostram preocupação com o usuário, com a segurança e com a confiabilidade dos dados.</p>
 <p>O grupo também aprendeu que a documentação precisa acompanhar o código: o modelo de dados mudou durante o desenvolvimento e o README só foi ajustado depois, na revisão feita para este documento. Essa mesma revisão corrigiu a acentuação das mensagens e removeu os logs de depuração, mostrando que revisar o próprio trabalho faz parte de entregar com qualidade.</p>
