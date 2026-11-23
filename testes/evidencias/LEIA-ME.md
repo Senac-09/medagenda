@@ -13,4 +13,4 @@ Estas imagens foram fornecidas para a atualização da documentação da Fase 3.
 | `TF19-consulta-agendada.png` | Consulta cadastrada para Ana Paula às 10:00 |
 | `TF23-telefone-paciente.png` | Mensagem de validação de telefone do paciente; não reproduz todo o procedimento específico da matriz |
 
-O vídeo `testes-funcionais-isaac.mp4` permanece no repositório original do GitHub, mas não está incluído neste ZIP.
+O vídeo `testes-funcionais-isaac.mp4` também está disponível nesta pasta do repositório.
